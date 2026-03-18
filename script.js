@@ -219,3 +219,31 @@ function switchProject(project) {
     }
 }
 
+
+// Бургер-меню
+function toggleMenu() {
+    const burger  = document.getElementById('burger');
+    const nav     = document.querySelector('nav');
+    const overlay = document.getElementById('nav-overlay');
+    const isOpen  = burger.classList.toggle('open');
+    nav.classList.toggle('open', isOpen);
+    overlay.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+// Закрыть меню при клике на ссылку
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            const burger  = document.getElementById('burger');
+            const nav     = document.querySelector('nav');
+            const overlay = document.getElementById('nav-overlay');
+            if (burger && nav.classList.contains('open')) {
+                burger.classList.remove('open');
+                nav.classList.remove('open');
+                overlay.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+});
