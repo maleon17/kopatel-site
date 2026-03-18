@@ -4241,17 +4241,7 @@ footer {
 .burger.open span:nth-child(2) { opacity: 0; }
 .burger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-.nav-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 260px;
-    bottom: 0;
-    background: rgba(0,0,0,0.55);
-    z-index: 9998;
-}
-.nav-overlay.open { display: block; }
+.nav-overlay { display: none; }
 
 /* ── Мобильные стили ── */
 @media (max-width: 768px) {

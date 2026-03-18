@@ -7,7 +7,7 @@ function copyIP() {
         setTimeout(() => {
             document.getElementById('server-ip').textContent = originalText;
         }, 2000);
-    }).catch(err => {
+    }).catch(() => {
         alert('Ошибка при копировании IP');
     });
 }
@@ -50,29 +50,34 @@ function openTab(tabName) {
 
 // Бургер-меню
 function toggleMenu() {
-    const burger  = document.getElementById('burger');
-    const nav     = document.querySelector('nav');
-    const overlay = document.getElementById('nav-overlay');
-    if (!burger || !nav || !overlay) return;
+    const burger = document.getElementById('burger');
+    const nav    = document.querySelector('nav');
+    if (!burger || !nav) return;
     const isOpen = burger.classList.toggle('open');
     nav.classList.toggle('open', isOpen);
-    overlay.classList.toggle('open', isOpen);
     document.body.style.overflow = isOpen ? 'hidden' : '';
 }
 
-// Закрыть меню при клике на ссылку
 function closeMenu() {
-    const burger  = document.getElementById('burger');
-    const nav     = document.querySelector('nav');
-    const overlay = document.getElementById('nav-overlay');
+    const burger = document.getElementById('burger');
+    const nav    = document.querySelector('nav');
     if (!burger) return;
     burger.classList.remove('open');
     nav.classList.remove('open');
-    overlay.classList.remove('open');
     document.body.style.overflow = '';
 }
 
-// Инициализация
+// Закрытие по клику вне меню
+document.addEventListener('click', function (e) {
+    const nav    = document.querySelector('nav');
+    const burger = document.getElementById('burger');
+    if (!nav || !nav.classList.contains('open')) return;
+    if (!nav.contains(e.target) && !burger.contains(e.target)) {
+        closeMenu();
+    }
+});
+
+// Закрытие по клику на ссылку в меню
 document.addEventListener('DOMContentLoaded', function () {
     updateOnlineCount();
     setInterval(updateOnlineCount, 5000);
