@@ -49,21 +49,26 @@ function openTab(tabName) {
 }
 
 // Бургер-меню
-function toggleMenu() {
+function toggleMenu(e) {
+    if (e) e.stopPropagation();
     const burger = document.getElementById('burger');
     const nav    = document.querySelector('nav');
+    const overlay = document.getElementById('nav-overlay');
     if (!burger || !nav) return;
     const isOpen = burger.classList.toggle('open');
     nav.classList.toggle('open', isOpen);
+    if (overlay) overlay.classList.toggle('open', isOpen);
     document.body.style.overflow = isOpen ? 'hidden' : '';
 }
 
 function closeMenu() {
-    const burger = document.getElementById('burger');
-    const nav    = document.querySelector('nav');
+    const burger  = document.getElementById('burger');
+    const nav     = document.querySelector('nav');
+    const overlay = document.getElementById('nav-overlay');
     if (!burger) return;
     burger.classList.remove('open');
     nav.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
     document.body.style.overflow = '';
 }
 
@@ -77,7 +82,7 @@ document.addEventListener('click', function (e) {
     }
 });
 
-// Закрытие по клику на ссылку в меню
+// Инициализация
 document.addEventListener('DOMContentLoaded', function () {
     updateOnlineCount();
     setInterval(updateOnlineCount, 5000);
