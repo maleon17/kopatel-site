@@ -10,22 +10,61 @@
 </head>
 <body>
 
-    <header>
+        <header>
         <div class="container">
-            <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">kopatel.platform</a></div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Главная</a></li>
-                    <li><a href="#game">Игра</a></li>
-                    <li><a href="#donate">Магазин</a></li>
-                    <li><a href="#support" class="nav-btn">Поддержка</a></li>
-                </ul>
-            </nav>
-        <button class="burger" id="burger" onclick="toggleMenu(event)" aria-label="Меню">
-            <span></span><span></span><span></span>
-        </button>
+            <div class="header-left">
+                <button class="sidebar-burger" id="sidebar-burger" onclick="toggleSidebar(event)" aria-label="Доп. меню">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="logo"><a href="index.html" style="text-decoration:none;color:inherit;">kopatel.platform</a></div>
+            </div>
+            <div class="header-right">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="shop.html">Kopatelpay</a></li>
+                        <li><a href="the-lost-beyond.html" class="nav-btn">Играть</a></li>
+                        <li><a href="https://t.me/kopatel_support_bot" target="_blank" class="nav-btn nav-btn-support">Поддержка</a></li>
+                    </ul>
+                </nav>
+                <a href="the-lost-beyond.html" class="nav-btn mobile-play-btn">Играть</a>
+                <button class="burger" id="burger" onclick="toggleMenu(event)" aria-label="Меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
     </header>
+
+    <!-- Сайдбар (десктоп) -->
+    <div class="sidebar" id="sidebar">
+        <p class="sidebar-title">Навигация</p>
+        <ul>
+            <li><a href="index.html">🏠 Главная</a></li>
+            <li><a href="shop.html">💳 Kopatelpay</a></li>
+            <li><a href="the-lost-beyond.html">⚔️ The lost beyond: reboot</a></li>
+            <li><a href="the-lost-beyond-shop.html">🛒 Магазин TLB</a></li>
+            <li><a href="general-services.html">🔧 Общие услуги</a></li>
+            <li><a href="https://t.me/copalpal" target="_blank">📢 Telegram канал</a></li>
+        </ul>
+    </div>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-nav" id="mobile-nav">
+        <p class="mobile-nav-title">Основное</p>
+        <ul>
+            <li><a href="index.html">🏠 Главная</a></li>
+            <li><a href="shop.html" class="nav-btn">💳 Kopatelpay</a></li>
+            <li><a href="https://t.me/kopatel_support_bot" target="_blank" class="nav-btn nav-btn-support">🆘 Поддержка</a></li>
+        </ul>
+        <p class="mobile-nav-title">Разделы</p>
+        <ul>
+            <li><a href="the-lost-beyond.html">⚔️ The lost beyond: reboot</a></li>
+            <li><a href="the-lost-beyond-shop.html">🛒 Магазин TLB</a></li>
+            <li><a href="general-services.html">🔧 Общие услуги</a></li>
+            <li><a href="https://t.me/copalpal" target="_blank">📢 Telegram канал</a></li>
+        </ul>
+    </div>
+    <div class="nav-overlay" id="nav-overlay" onclick="toggleMenu(event)"></div>
 
     <section class="hero game-hero" id="game">
         <div class="hero-content">
@@ -169,22 +208,11 @@
         </div>
     </section>
 
-    <section class="donate" id="donate">
+        <section class="donate" id="donate">
         <div class="container">
             <h2>Магазин</h2>
-            <p>Поддержите сервер и получите преимущества!</p>
-            <div class="donate-options">
-                <div class="option">
-                    <h3>Смена Команды</h3>
-                    <p>Перейдите в другую команду.</p>
-                    <a href="https://t.me/kopatel_platform_bot?text=%F0%9F%94%84%20%D0%A1%D0%BC%D0%B5%D0%BD%D0%B0%20%D1%84%D1%80%D0%B0%D0%BA%D1%86%D0%B8%D0%B8" target="_blank" class="purchase-btn">Купить за 150 звезд</a>
-                </div>
-                <div class="option">
-                    <h3>Смена Класса</h3>
-                    <p>Выберите новый класс.</p>
-                    <a href="https://t.me/kopatel_platform_bot?text=%F0%9F%8E%92%20%D0%A1%D0%BC%D0%B5%D0%BD%D0%B0%20%D0%BA%D0%B8%D1%82%D0%B0" target="_blank" class="purchase-btn">Купить за 100 звезд</a>
-                </div>
-            </div>
+            <p>Поддержите сервер и получите игровые преимущества!</p>
+            <a href="the-lost-beyond-shop.html" class="project-btn" style="font-size:18px; padding: 16px 40px;">Перейти в магазин</a>
         </div>
     </section>
 

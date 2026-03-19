@@ -10,22 +10,61 @@
 </head>
 <body>
 
-    <header>
+        <header>
         <div class="container">
-            <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">kopatel.platform</a></div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Главная</a></li>
-                    <li><a href="the-lost-beyond-shop.html">The lost beyond</a></li>
-                    <li><a href="general-services.html">Общие услуги</a></li>
-                    <li><a href="#support" class="nav-btn">Поддержка</a></li>
-                </ul>
-            </nav>
-        <button class="burger" id="burger" onclick="toggleMenu(event)" aria-label="Меню">
-            <span></span><span></span><span></span>
-        </button>
+            <div class="header-left">
+                <button class="sidebar-burger" id="sidebar-burger" onclick="toggleSidebar(event)" aria-label="Доп. меню">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="logo"><a href="index.html" style="text-decoration:none;color:inherit;">kopatel.platform</a></div>
+            </div>
+            <div class="header-right">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="shop.html">Kopatelpay</a></li>
+                        <li><a href="the-lost-beyond.html" class="nav-btn">Играть</a></li>
+                        <li><a href="https://t.me/kopatel_support_bot" target="_blank" class="nav-btn nav-btn-support">Поддержка</a></li>
+                    </ul>
+                </nav>
+                <a href="the-lost-beyond.html" class="nav-btn mobile-play-btn">Играть</a>
+                <button class="burger" id="burger" onclick="toggleMenu(event)" aria-label="Меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
     </header>
+
+    <!-- Сайдбар (десктоп) -->
+    <div class="sidebar" id="sidebar">
+        <p class="sidebar-title">Навигация</p>
+        <ul>
+            <li><a href="index.html">🏠 Главная</a></li>
+            <li><a href="shop.html">💳 Kopatelpay</a></li>
+            <li><a href="the-lost-beyond.html">⚔️ The lost beyond: reboot</a></li>
+            <li><a href="the-lost-beyond-shop.html">🛒 Магазин TLB</a></li>
+            <li><a href="general-services.html">🔧 Общие услуги</a></li>
+            <li><a href="https://t.me/copalpal" target="_blank">📢 Telegram канал</a></li>
+        </ul>
+    </div>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-nav" id="mobile-nav">
+        <p class="mobile-nav-title">Основное</p>
+        <ul>
+            <li><a href="index.html">🏠 Главная</a></li>
+            <li><a href="shop.html" class="nav-btn">💳 Kopatelpay</a></li>
+            <li><a href="https://t.me/kopatel_support_bot" target="_blank" class="nav-btn nav-btn-support">🆘 Поддержка</a></li>
+        </ul>
+        <p class="mobile-nav-title">Разделы</p>
+        <ul>
+            <li><a href="the-lost-beyond.html">⚔️ The lost beyond: reboot</a></li>
+            <li><a href="the-lost-beyond-shop.html">🛒 Магазин TLB</a></li>
+            <li><a href="general-services.html">🔧 Общие услуги</a></li>
+            <li><a href="https://t.me/copalpal" target="_blank">📢 Telegram канал</a></li>
+        </ul>
+    </div>
+    <div class="nav-overlay" id="nav-overlay" onclick="toggleMenu(event)"></div>
 
     <section class="hero shop-hero">
         <div class="hero-content">

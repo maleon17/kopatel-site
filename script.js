@@ -48,37 +48,64 @@ function openTab(tabName) {
     });
 }
 
-// Бургер-меню
+// ── Мобильное меню (бургер справа) ──
 function toggleMenu(e) {
     if (e) e.stopPropagation();
-    const burger = document.getElementById('burger');
-    const nav    = document.querySelector('nav');
-    const overlay = document.getElementById('nav-overlay');
-    if (!burger || !nav) return;
+    const burger   = document.getElementById('burger');
+    const mobileNav = document.getElementById('mobile-nav');
+    const overlay  = document.getElementById('nav-overlay');
+    if (!burger || !mobileNav) return;
     const isOpen = burger.classList.toggle('open');
-    nav.classList.toggle('open', isOpen);
+    mobileNav.classList.toggle('open', isOpen);
     if (overlay) overlay.classList.toggle('open', isOpen);
     document.body.style.overflow = isOpen ? 'hidden' : '';
+    // Закрыть сайдбар если открыт
+    if (isOpen) closeSidebar();
 }
 
 function closeMenu() {
-    const burger  = document.getElementById('burger');
-    const nav     = document.querySelector('nav');
-    const overlay = document.getElementById('nav-overlay');
+    const burger    = document.getElementById('burger');
+    const mobileNav = document.getElementById('mobile-nav');
+    const overlay   = document.getElementById('nav-overlay');
     if (!burger) return;
     burger.classList.remove('open');
-    nav.classList.remove('open');
+    if (mobileNav) mobileNav.classList.remove('open');
     if (overlay) overlay.classList.remove('open');
     document.body.style.overflow = '';
 }
 
+// ── Сайдбар (десктоп, слева) ──
+function toggleSidebar(e) {
+    if (e) e.stopPropagation();
+    const btn     = document.getElementById('sidebar-burger');
+    const sidebar = document.getElementById('sidebar');
+    if (!btn || !sidebar) return;
+    const isOpen = btn.classList.toggle('open');
+    sidebar.classList.toggle('open', isOpen);
+    // Закрыть мобильное меню если открыто
+    if (isOpen) closeMenu();
+}
+
+function closeSidebar() {
+    const btn     = document.getElementById('sidebar-burger');
+    const sidebar = document.getElementById('sidebar');
+    if (!btn) return;
+    btn.classList.remove('open');
+    if (sidebar) sidebar.classList.remove('open');
+}
+
 // Закрытие по клику вне меню
 document.addEventListener('click', function (e) {
-    const nav    = document.querySelector('nav');
-    const burger = document.getElementById('burger');
-    if (!nav || !nav.classList.contains('open')) return;
-    if (!nav.contains(e.target) && !burger.contains(e.target)) {
-        closeMenu();
+    const mobileNav = document.getElementById('mobile-nav');
+    const burger    = document.getElementById('burger');
+    const sidebar   = document.getElementById('sidebar');
+    const sidebarBtn = document.getElementById('sidebar-burger');
+
+    if (mobileNav && mobileNav.classList.contains('open')) {
+        if (!mobileNav.contains(e.target) && !burger.contains(e.target)) closeMenu();
+    }
+    if (sidebar && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(e.target) && !sidebarBtn.contains(e.target)) closeSidebar();
     }
 });
 
@@ -86,8 +113,13 @@ document.addEventListener('click', function (e) {
 document.addEventListener('DOMContentLoaded', function () {
     updateOnlineCount();
     setInterval(updateOnlineCount, 5000);
-    document.querySelectorAll('nav a').forEach(link => {
+    // Закрывать мобильное меню при клике на ссылку
+    document.querySelectorAll('#mobile-nav a').forEach(link => {
         link.addEventListener('click', closeMenu);
+    });
+    // Закрывать сайдбар при клике на ссылку
+    document.querySelectorAll('#sidebar a').forEach(link => {
+        link.addEventListener('click', closeSidebar);
     });
 });
 
