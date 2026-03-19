@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>kopatel.platform</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⛏️</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
@@ -11,7 +12,7 @@
 
     <header>
         <div class="container">
-            <div class="logo">kopatel.platform</div>
+            <div class="logo"><a href="index.html" style="text-decoration:none;color:inherit;">kopatel.platform</a></div>
             <nav>
                 <ul>
                     <li><a href="#home">Главная</a></li>
@@ -19,6 +20,7 @@
                     <li><a href="#about">О платформе</a></li>
                     <li><a href="shop.html" class="nav-btn">Kopatelpay</a></li>
                     <li><a href="games.html" class="nav-btn">Играть</a></li>
+                    <li><a href="https://t.me/kopatel_support_bot" target="_blank" class="nav-btn nav-btn-support">Поддержка</a></li>
                 </ul>
             </nav>
             <button class="burger" id="burger" onclick="toggleMenu(event)" aria-label="Меню">
@@ -35,6 +37,9 @@
             <div class="status">
                 <span class="dot"></span> Выбери свой проект ниже
             </div>
+        <div class="scroll-arrow" onclick="document.getElementById('projects') ? document.getElementById('projects').scrollIntoView({behavior:'smooth'}) : window.scrollBy({top:window.innerHeight,behavior:'smooth'})">
+            <span></span><span></span><span></span>
+        </div>
         </div>
     </section>
 
@@ -73,6 +78,9 @@
                     </div>
                 </div>
             </div>
+        <div class="scroll-arrow" onclick="document.getElementById('projects') ? document.getElementById('projects').scrollIntoView({behavior:'smooth'}) : window.scrollBy({top:window.innerHeight,behavior:'smooth'})">
+            <span></span><span></span><span></span>
+        </div>
         </div>
     </section>
 
@@ -80,6 +88,9 @@
         <div class="container">
             <h2>О kopatel.platform</h2>
             <p>kopatel.platform — это мульти-проект, объединяющий множество жанров и стилей игры. Выбери свой путь: от эпических битв до стратегических приключений. Каждый проект создан для максимального удовольствия и разнообразия!</p>
+        <div class="scroll-arrow" onclick="document.getElementById('projects') ? document.getElementById('projects').scrollIntoView({behavior:'smooth'}) : window.scrollBy({top:window.innerHeight,behavior:'smooth'})">
+            <span></span><span></span><span></span>
+        </div>
         </div>
     </section>
 

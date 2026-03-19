@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The lost beyond: reboot - kopatel.platform</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⛏️</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
@@ -34,6 +35,9 @@
             <div class="status">
                 <span class="dot"></span> Сейчас в игре: <b id="online-count">0</b>
             </div>
+        <div class="scroll-arrow" onclick="document.getElementById('projects') ? document.getElementById('projects').scrollIntoView({behavior:'smooth'}) : window.scrollBy({top:window.innerHeight,behavior:'smooth'})">
+            <span></span><span></span><span></span>
+        </div>
         </div>
     </section>
 
@@ -84,6 +88,27 @@
                     </div>
                 </div>
             </div>
+            <div id="mechanics" class="tab-content">
+                <h3>Механики Сервера</h3>
+                <div class="class-list">
+                    <div class="class-item">
+                        <h4>🕵️ Система ролей</h4>
+                        <p>ПКМ пустой рукой по игроку — в чате появится его ник и роль.</p>
+                    </div>
+                    <div class="class-item">
+                        <h4>📦 Стартовый кит</h4>
+                        <p>Команда <strong>/kit</strong> — получи стартовое снаряжение.</p>
+                    </div>
+                    <div class="class-item">
+                        <h4>🗳 Выборы лидеров</h4>
+                        <p><strong>/apply</strong> — подать заявку на лидера. <strong>/vote</strong> — проголосовать. Лидер назначает до 2 офицеров: Shift + ЛКМ по игроку.</p>
+                    </div>
+                    <div class="class-item">
+                        <h4>🎒 Эндер-сундук</h4>
+                        <p>Команда <strong>/ec</strong> — личный сундук. Недоступен 20 сек после боя. Всего 3 слота, первый открыт сразу.</p>
+                    </div>
+                </div>
+            </div>
             <div id="classes" class="tab-content">
                 <h3>Классы Персонажей</h3>
                 <p>Выберите свой класс для участия в боях!</p>
@@ -118,6 +143,9 @@
                     </div>
                 </div>
             </div>
+        <div class="scroll-arrow" onclick="document.getElementById('projects') ? document.getElementById('projects').scrollIntoView({behavior:'smooth'}) : window.scrollBy({top:window.innerHeight,behavior:'smooth'})">
+            <span></span><span></span><span></span>
+        </div>
         </div>
     </section>
 
