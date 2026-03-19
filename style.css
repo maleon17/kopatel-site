@@ -217,6 +217,74 @@ nav a:hover::after { width: 100%; }
 /* Кнопка Играть только на мобильных */
 .mobile-play-btn { display: none !important; }
 
+/* Mobile-nav скрыт на десктопе */
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 260px;
+    height: 100vh;
+    background: #0d0d0d;
+    border-left: 2px solid #2ecc71;
+    display: flex;
+    flex-direction: column;
+    padding: 80px 20px 40px;
+    transition: right 0.3s ease;
+    z-index: 9999;
+    overflow-y: auto;
+}
+.mobile-nav.open { right: 0; }
+.mobile-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.mobile-nav ul li a {
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    font-weight: 500;
+    white-space: normal;
+}
+.mobile-nav ul li a:hover {
+    background: rgba(46, 204, 113, 0.12);
+    color: #2ecc71;
+}
+.mobile-nav .nav-btn {
+    background: linear-gradient(90deg, #2ecc71, #27ae60) !important;
+    color: #fff !important;
+    text-align: center !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    display: block !important;
+}
+.mobile-nav .nav-btn-support {
+    background: linear-gradient(90deg, #3498db, #2980b9) !important;
+}
+.mobile-nav-title {
+    font-size: 11px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 16px 0 8px 14px;
+}
+.mobile-nav-title:first-child { margin-top: 0; }
+
+/* nav-overlay */
+.nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 9998;
+}
+.nav-overlay.open { display: block; }
+
 
 
 .logo {
@@ -4513,74 +4581,42 @@ footer {
 
 /* ── Мобильные стили ── */
 @media (max-width: 768px) {
+    /* Хедер */
     header .container {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
     }
 
-    /* На мобильных прячем десктопную nav */
-    .header-right nav { display: none; }
+    /* Скрываем десктопные элементы */
+    .header-right nav { display: none !important; }
+    .sidebar-burger { display: none !important; }
+    .sidebar { display: none !important; }
 
-    /* Показываем только кнопку Играть */
-    .mobile-play-btn {
-        display: inline-block !important;
-        white-space: nowrap;
-    }
+    /* Показываем мобильные элементы */
+    .burger { display: flex !important; }
+    .mobile-play-btn { display: inline-block !important; white-space: nowrap; }
 
-    /* Основной бургер справа */
-    .burger { display: flex; }
+    /* Мобильное меню */
+    .mobile-nav {
+        position: fixed !important;
+        top: 0 !important;
+        right: -280px !important;
+        left: auto !important;
+        width: 260px !important;
+        height: 100vh !important;
+        background: #0d0d0d !important;
+        border-left: 2px solid #2ecc71 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 80px 20px 40px !important;
+        transition: right 0.3s ease !important;
+        z-index: 9999 !important;
+        overflow-y: auto !important;
+    }
+    .mobile-nav.open { right: 0 !important; }
 
-    nav.mobile-menu {
-        position: fixed;
-        top: 0;
-        right: -280px;
-        width: 260px;
-        height: 100vh;
-        background: #0d0d0d;
-        border-left: 2px solid #2ecc71;
-        display: flex;
-        flex-direction: column;
-        padding: 80px 30px 40px;
-        transition: right 0.3s ease;
-        z-index: 9999;
-        overflow-y: auto;
-    }
-    nav.mobile-menu.open { right: 0; }
-
-    nav.mobile-menu ul {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-        width: 100%;
-        padding: 0;
-    }
-    nav.mobile-menu li { width: 100%; text-align: left; }
-    nav.mobile-menu a {
-        font-size: 15px !important;
-        padding: 10px 0 !important;
-        display: block !important;
-        width: 100% !important;
-        max-width: none !important;
-        white-space: normal !important;
-        overflow: visible !important;
-        text-overflow: unset !important;
-        border-bottom: 1px solid rgba(255,255,255,0.06) !important;
-        background: none !important;
-        color: #fff !important;
-        border-radius: 0 !important;
-    }
-    nav.mobile-menu a:hover { color: #2ecc71 !important; }
-    nav.mobile-menu .nav-section-title {
-        color: #2ecc71;
-        font-size: 11px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        opacity: 0.6;
-        margin: 20px 0 10px;
-        display: block;
-    }
-
+    /* Остальные мобильные стили */
     .projects-grid, .games-grid, .shop-modes { grid-template-columns: 1fr; gap: 20px; }
     .donate-options { flex-direction: column; align-items: center; }
     .teams { flex-direction: column; gap: 20px; align-items: center; }
