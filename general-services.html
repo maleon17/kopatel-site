@@ -13,7 +13,7 @@
         <header>
         <div class="container">
             <div class="header-left">
-                <button class="sidebar-burger" id="sidebar-burger" onclick="toggleSidebar(event)" aria-label="Доп. меню">
+                <button class="burger" id="burger" onclick="toggleMenu(event)" aria-label="Меню">
                     <span></span><span></span><span></span>
                 </button>
                 <div class="logo"><a href="index.html" style="text-decoration:none;color:inherit;">kopatel.platform</a></div>
@@ -28,14 +28,11 @@
                     </ul>
                 </nav>
                 <a href="the-lost-beyond.html" class="nav-btn mobile-play-btn">Играть</a>
-                <button class="burger" id="burger" onclick="toggleMenu(event)" aria-label="Меню">
-                    <span></span><span></span><span></span>
-                </button>
             </div>
         </div>
     </header>
 
-    <!-- Сайдбар (десктоп) -->
+    <!-- Сайдбар десктоп (слева) -->
     <div class="sidebar" id="sidebar">
         <p class="sidebar-title">Навигация</p>
         <ul>
@@ -48,7 +45,7 @@
         </ul>
     </div>
 
-    <!-- Мобильное меню -->
+    <!-- Мобильное меню (справа) -->
     <div class="mobile-nav" id="mobile-nav">
         <p class="mobile-nav-title">Основное</p>
         <ul>

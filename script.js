@@ -1,15 +1,11 @@
-// Копирование IP сервера
+// Копирование IP
 function copyIP() {
     const serverIP = document.getElementById('server-ip').textContent;
     navigator.clipboard.writeText(serverIP).then(() => {
-        const originalText = document.getElementById('server-ip').textContent;
+        const orig = serverIP;
         document.getElementById('server-ip').textContent = '✓ Скопировано!';
-        setTimeout(() => {
-            document.getElementById('server-ip').textContent = originalText;
-        }, 2000);
-    }).catch(() => {
-        alert('Ошибка при копировании IP');
-    });
+        setTimeout(() => { document.getElementById('server-ip').textContent = orig; }, 2000);
+    }).catch(() => alert('Ошибка при копировании IP'));
 }
 
 // Онлайн-счётчик
@@ -17,17 +13,15 @@ async function updateOnlineCount() {
     const el = document.getElementById('online-count');
     if (!el) return;
     try {
-        const response = await fetch('https://api.mcsrvstat.us/2/game11.gamely.pro:24001');
-        const data = await response.json();
-        el.textContent = data.players ? data.players.online : 0;
-    } catch (error) {
-        el.textContent = '—';
-    }
+        const r = await fetch('https://api.mcsrvstat.us/2/game11.gamely.pro:24001');
+        const d = await r.json();
+        el.textContent = d.players ? d.players.online : 0;
+    } catch { el.textContent = '—'; }
 }
 
 // Плавная прокрутка
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
         if (href !== '#' && document.querySelector(href)) {
             e.preventDefault();
@@ -36,115 +30,97 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Переключение вкладок
+// Вкладки
 function openTab(tabName) {
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
     document.getElementById(tabName).classList.add('active');
     document.querySelectorAll('.tab-button').forEach(b => {
-        if ((b.getAttribute('onclick') || '').includes("'" + tabName + "'")) {
-            b.classList.add('active');
-        }
+        if ((b.getAttribute('onclick') || '').includes("'" + tabName + "'")) b.classList.add('active');
     });
 }
 
-// ── Мобильное меню (бургер справа) ──
+// ── Единый бургер — на десктопе открывает сайдбар слева, на мобильных меню справа ──
 function toggleMenu(e) {
     if (e) e.stopPropagation();
-    const burger   = document.getElementById('burger');
-    const mobileNav = document.getElementById('mobile-nav');
-    const overlay  = document.getElementById('nav-overlay');
-    if (!burger || !mobileNav) return;
-    const isOpen = burger.classList.toggle('open');
-    mobileNav.classList.toggle('open', isOpen);
-    if (overlay) overlay.classList.toggle('open', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    // Закрыть сайдбар если открыт
-    if (isOpen) closeSidebar();
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+        _toggleMobileNav();
+    } else {
+        _toggleSidebar();
+    }
 }
 
-function closeMenu() {
+function _toggleMobileNav() {
     const burger    = document.getElementById('burger');
     const mobileNav = document.getElementById('mobile-nav');
     const overlay   = document.getElementById('nav-overlay');
-    if (!burger) return;
-    burger.classList.remove('open');
+    if (!mobileNav) return;
+    const isOpen = mobileNav.classList.toggle('open');
+    burger.classList.toggle('open', isOpen);
+    if (overlay) overlay.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+function _toggleSidebar() {
+    const burger  = document.getElementById('burger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('nav-overlay');
+    if (!sidebar) return;
+    const isOpen = sidebar.classList.toggle('open');
+    burger.classList.toggle('open', isOpen);
+    if (overlay) overlay.classList.toggle('open', isOpen);
+}
+
+function closeAll() {
+    const burger    = document.getElementById('burger');
+    const mobileNav = document.getElementById('mobile-nav');
+    const sidebar   = document.getElementById('sidebar');
+    const overlay   = document.getElementById('nav-overlay');
+    if (burger)    burger.classList.remove('open');
     if (mobileNav) mobileNav.classList.remove('open');
-    if (overlay) overlay.classList.remove('open');
+    if (sidebar)   sidebar.classList.remove('open');
+    if (overlay)   overlay.classList.remove('open');
     document.body.style.overflow = '';
 }
 
-// ── Сайдбар (десктоп, слева) ──
-function toggleSidebar(e) {
-    if (e) e.stopPropagation();
-    const btn     = document.getElementById('sidebar-burger');
-    const sidebar = document.getElementById('sidebar');
-    if (!btn || !sidebar) return;
-    const isOpen = btn.classList.toggle('open');
-    sidebar.classList.toggle('open', isOpen);
-    // Закрыть мобильное меню если открыто
-    if (isOpen) closeMenu();
-}
-
-function closeSidebar() {
-    const btn     = document.getElementById('sidebar-burger');
-    const sidebar = document.getElementById('sidebar');
-    if (!btn) return;
-    btn.classList.remove('open');
-    if (sidebar) sidebar.classList.remove('open');
-}
-
-// Закрытие по клику вне меню
-document.addEventListener('click', function (e) {
-    const mobileNav = document.getElementById('mobile-nav');
+// Закрытие по клику вне
+document.addEventListener('click', function(e) {
     const burger    = document.getElementById('burger');
+    const mobileNav = document.getElementById('mobile-nav');
     const sidebar   = document.getElementById('sidebar');
-    const sidebarBtn = document.getElementById('sidebar-burger');
-
-    if (mobileNav && mobileNav.classList.contains('open')) {
-        if (!mobileNav.contains(e.target) && !burger.contains(e.target)) closeMenu();
-    }
-    if (sidebar && sidebar.classList.contains('open')) {
-        if (!sidebar.contains(e.target) && !sidebarBtn.contains(e.target)) closeSidebar();
-    }
+    const isMenuOpen = (mobileNav && mobileNav.classList.contains('open')) ||
+                       (sidebar   && sidebar.classList.contains('open'));
+    if (!isMenuOpen) return;
+    if (burger && burger.contains(e.target)) return;
+    if (mobileNav && mobileNav.contains(e.target)) return;
+    if (sidebar   && sidebar.contains(e.target)) return;
+    closeAll();
 });
 
 // Инициализация
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     updateOnlineCount();
     setInterval(updateOnlineCount, 5000);
-    // Закрывать мобильное меню при клике на ссылку
-    document.querySelectorAll('#mobile-nav a').forEach(link => {
-        link.addEventListener('click', closeMenu);
-    });
-    // Закрывать сайдбар при клике на ссылку
-    document.querySelectorAll('#sidebar a').forEach(link => {
-        link.addEventListener('click', closeSidebar);
+    document.querySelectorAll('#mobile-nav a, #sidebar a').forEach(a => {
+        a.addEventListener('click', closeAll);
     });
 });
 
-// Покупка товара
+// Покупка
 function purchaseItem(itemName, price) {
     try {
-        const message = `Хочу купить: ${itemName}\nЦена: ${price} ⭐`;
-        window.open(`https://t.me/kopatel_platform_bot?text=${encodeURIComponent(message)}`, '_blank');
-    } catch (error) {
-        window.open('https://t.me/kopatel_platform_bot', '_blank');
-    }
+        window.open(`https://t.me/kopatel_platform_bot?text=${encodeURIComponent(`Хочу купить: ${itemName}\nЦена: ${price} ⭐`)}`, '_blank');
+    } catch { window.open('https://t.me/kopatel_platform_bot', '_blank'); }
 }
 
 // Переключение проектов
 function switchProject(project) {
-    document.querySelectorAll('.selector-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.selector-btn').forEach(b => b.classList.remove('active'));
     const btn = document.querySelector(`[onclick="switchProject('${project}')"]`);
     if (btn) btn.classList.add('active');
-    const kopatelContent = document.getElementById('kopatel-content');
-    const comingContent  = document.getElementById('coming-content');
-    if (project === 'reboot') {
-        kopatelContent.style.display = 'block';
-        comingContent.style.display  = 'none';
-    } else if (project === 'coming') {
-        kopatelContent.style.display = 'none';
-        comingContent.style.display  = 'block';
-    }
+    const k = document.getElementById('kopatel-content');
+    const c = document.getElementById('coming-content');
+    if (project === 'reboot') { k.style.display='block'; c.style.display='none'; }
+    else if (project === 'coming') { k.style.display='none'; c.style.display='block'; }
 }

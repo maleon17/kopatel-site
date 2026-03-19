@@ -71,8 +71,8 @@ header .container {
     gap: 12px;
 }
 
-/* ── Сайдбар-бургер (десктоп, слева) ── */
-.sidebar-burger {
+/* ── Бургер (единый) ── */
+.burger {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -83,7 +83,7 @@ header .container {
     z-index: 10002;
     flex-shrink: 0;
 }
-.sidebar-burger span {
+.burger span {
     display: block;
     width: 24px;
     height: 3px;
@@ -92,9 +92,9 @@ header .container {
     transition: all 0.3s;
     pointer-events: none;
 }
-.sidebar-burger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-.sidebar-burger.open span:nth-child(2) { opacity: 0; }
-.sidebar-burger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+.burger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 /* ── Сайдбар (десктоп доп. навигация) ── */
 .sidebar {
@@ -4588,33 +4588,12 @@ footer {
         align-items: center;
     }
 
-    /* Скрываем десктопные элементы */
+    /* Скрываем десктопный nav, показываем кнопку Играть */
     .header-right nav { display: none !important; }
-    .sidebar-burger { display: none !important; }
-    .sidebar { display: none !important; }
-
-    /* Показываем мобильные элементы */
-    .burger { display: flex !important; }
     .mobile-play-btn { display: inline-block !important; white-space: nowrap; }
 
-    /* Мобильное меню */
-    .mobile-nav {
-        position: fixed !important;
-        top: 0 !important;
-        right: -280px !important;
-        left: auto !important;
-        width: 260px !important;
-        height: 100vh !important;
-        background: #0d0d0d !important;
-        border-left: 2px solid #2ecc71 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        padding: 80px 20px 40px !important;
-        transition: right 0.3s ease !important;
-        z-index: 9999 !important;
-        overflow-y: auto !important;
-    }
-    .mobile-nav.open { right: 0 !important; }
+    /* Сайдбар скрыт на мобильных */
+    .sidebar { display: none !important; }
 
     /* Остальные мобильные стили */
     .projects-grid, .games-grid, .shop-modes { grid-template-columns: 1fr; gap: 20px; }
