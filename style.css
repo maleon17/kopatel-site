@@ -4419,12 +4419,7 @@ footer {
 
 /* Стрелка скролла в hero */
 .scroll-arrow {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    pointer-events: auto;
+    position: static;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -4432,6 +4427,7 @@ footer {
     cursor: pointer;
     animation: bounce 2s infinite;
     opacity: 0.7;
+    margin-top: 30px;y: 0.7;
 }
 .scroll-arrow span {
     display: block;
