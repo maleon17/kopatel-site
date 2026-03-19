@@ -4427,8 +4427,8 @@ footer {
     cursor: pointer;
     animation: bounce 2s infinite;
     opacity: 0.7;
-    margin-top: 30px;
-    width: 100%;y: 0.7;
+    margin: 30px auto 0;
+    width: fit-content;y: 0.7;
 }
 .scroll-arrow span {
     display: block;
