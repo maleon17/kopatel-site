@@ -4681,7 +4681,17 @@ footer {
     .steps { grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .tabs { flex-direction: column; align-items: center; }
     .tab-button { width: 200px; }
-    .hero, .shop-hero, .games-hero, .game-hero, .general-services-hero { min-height: auto !important; padding: 80px 20px 40px !important; display: block !important; }
+    .hero, .shop-hero, .games-hero, .game-hero, .general-services-hero {
+        min-height: unset !important;
+        height: auto !important;
+        padding: 60px 20px 40px !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+    }
+    .hero-content, .shop-hero .hero-content, .games-hero .hero-content {
+        padding: 20px !important;
+        width: 100% !important;
+    }
     .hero h1, .shop-hero h1, .games-hero h1 { font-size: 28px; }
     .hero p, .shop-hero p, .games-hero p { font-size: 14px; }
 }
