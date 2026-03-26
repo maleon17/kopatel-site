@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script>
+    var l = window.location;
+    sessionStorage.redirect = l.pathname + l.search + l.hash;
+    l.replace(l.protocol + '//' + l.host + '/kopatel-site/');
+  </script>
+</head>
+<body></body>
+</html>
