@@ -4,8 +4,10 @@
   <meta charset="utf-8">
   <script>
     var l = window.location;
+    var segments = l.pathname.split('/').filter(Boolean);
+    var base = segments.length > 0 ? '/' + segments[0] + '/' : '/';
     sessionStorage.redirect = l.pathname + l.search + l.hash;
-    l.replace(l.protocol + '//' + l.host + '/kopatel-site/');
+    l.replace(l.protocol + '//' + l.host + base);
   </script>
 </head>
 <body></body>
