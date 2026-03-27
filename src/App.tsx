@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import GamesPage from './pages/GamesPage';
@@ -9,9 +10,18 @@ import GeneralServicesPage from './pages/GeneralServicesPage';
 import NotFoundPage from './pages/NotFoundPage';
 import './index.css';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 export default function App() {
   return (
     <BrowserRouter basename="/Kopatel.platform">
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<><Header /><HomePage /></>} />
         <Route path="/games" element={<><Header /><GamesPage /></>} />

@@ -47,7 +47,7 @@ export default function Footer({
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; 2025 kopatel.platform. Все права защищены.</p>
+          <p>&copy; 2026 kopatel.platform. Все права защищены.</p>
         </div>
       </div>
     </footer>

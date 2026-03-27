@@ -75,7 +75,7 @@ export default function GamesPage() {
                 <p>Новые измерения уже на подходе, главное — не трогать серую кнопку...</p>
                 <div className="game-features">
                   <span className="feature">Тайна</span>
-                  <span className="feature">2025</span>
+                  <span className="feature">2026</span>
                 </div>
                 <div className="game-stats">
                   <div className="stat">
@@ -84,7 +84,7 @@ export default function GamesPage() {
                   </div>
                   <div className="stat">
                     <span className="stat-label">Релиз:</span>
-                    <span className="stat-value">2025</span>
+                    <span className="stat-value">2026</span>
                   </div>
                 </div>
                 <button onClick={() => navigate('/notfound')} className="game-btn disabled">Не кликать!</button>

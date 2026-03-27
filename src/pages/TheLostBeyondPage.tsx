@@ -35,8 +35,14 @@ export default function TheLostBeyondPage() {
   const [animating, setAnimating] = useState(false);
   const [online, setOnline] = useState<string>('0');
   const [copied, setCopied] = useState(false);
-  const isMobile = window.innerWidth <= 768;
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const fetchOnline = async () => {
@@ -73,14 +79,12 @@ export default function TheLostBeyondPage() {
     }, 300);
   };
 
-  // Определяем направление анимации
   const getDirection = (from: TabId, to: TabId) => {
     return TAB_INDEX[to] > TAB_INDEX[from] ? 'forward' : 'backward';
   };
 
   const direction = prevTab ? getDirection(prevTab, activeTab) : 'forward';
 
-  // Классы анимации
   const getAnimClass = () => {
     if (!animating) return 'tab-anim-idle';
     if (isMobile) {
