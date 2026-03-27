@@ -2685,18 +2685,19 @@ footer {
     99% { opacity: 0.8; }
 }
 
-.not-found-subtitle {
-    font-size: clamp(18px, 4vw, 28px);
+.not-found-title {
+    font-size: clamp(20px, 4vw, 32px);
     font-weight: 700;
-    color: #fff;
-    margin-bottom: 16px;
+    color: #ffffff;
+    margin-bottom: 12px;
 }
 
-.not-found-desc {
-    font-size: 16px;
-    color: #bdc3c7;
-    line-height: 1.7;
-    margin-bottom: 40px;
+.not-found-subtitle {
+    font-size: clamp(14px, 3vw, 18px);
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto 40px;
 }
 
 .not-found-actions {
