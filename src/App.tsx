@@ -11,36 +11,12 @@ import NotFoundPage from './pages/NotFoundPage';
 import './index.css';
 
 const FADE_OUT = 150;
-const SCROLL_DURATION = 400;
 const FADE_IN = 250;
-
-function easeOutCubic(t: number): number {
-  return 1 - Math.pow(1 - t, 3);
-}
-
-function smoothScrollToTop(duration: number): Promise<void> {
-  return new Promise((resolve) => {
-    const start = window.scrollY;
-    if (start === 0) { resolve(); return; }
-    const startTime = performance.now();
-    const step = (now: number) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      window.scrollTo(0, start * (1 - easeOutCubic(progress)));
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
-        resolve();
-      }
-    };
-    requestAnimationFrame(step);
-  });
-}
 
 function PageTransition({ children }: { children: React.ReactNode }) {
   const { pathname } = useLocation();
   const [displayChildren, setDisplayChildren] = useState(children);
-  const [phase, setPhase] = useState<'idle' | 'out' | 'scrolling' | 'in'>('idle');
+  const [phase, setPhase] = useState<'idle' | 'out' | 'in'>('idle');
   const prevPathname = useRef(pathname);
 
   useEffect(() => {
@@ -50,13 +26,12 @@ function PageTransition({ children }: { children: React.ReactNode }) {
     // 1. Fade out
     setPhase('out');
 
-    const outTimer = setTimeout(async () => {
-      // 2. Swap content, start scroll
+    const outTimer = setTimeout(() => {
+      // 2. Моментальный скролл пока темно
+      window.scrollTo(0, 0);
+      // 3. Swap контента
       setDisplayChildren(children);
-      setPhase('scrolling');
-      await smoothScrollToTop(SCROLL_DURATION);
-
-      // 3. Fade in
+      // 4. Fade in
       setPhase('in');
       const inTimer = setTimeout(() => setPhase('idle'), FADE_IN);
       return () => clearTimeout(inTimer);
