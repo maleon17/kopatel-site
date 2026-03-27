@@ -90,7 +90,8 @@ export default function NotFoundPage() {
           <h1 className="glitch" data-text="404">404</h1>
         </div>
 
-        <p className="not-found-subtitle">Похоже, этот сегмент данных провалился сквозь текстуры веба. Мы отправили поисковый отряд, но они нашли только этот глитч.</p>
+        <h2 className="not-found-title text-white text-2xl font-bold mt-4 mb-2">ОШИБКА КОДА РЕАЛЬНОСТИ</h2>
+        <p className="not-found-subtitle text-gray-400 opacity-60">Похоже, этот сегмент данных провалился сквозь текстуры веба. Мы отправили поисковый отряд, но они нашли только этот глитч.</p>
 
         <div className="not-found-actions">
           <button className="not-found-btn" onClick={() => navigate('/')}>
