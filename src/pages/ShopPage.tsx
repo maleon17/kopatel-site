@@ -55,7 +55,7 @@ export default function ShopPage() {
                   <span className="feature">2026</span>
                   <span className="feature">Скоро</span>
                 </div>
-                <button onClick={() => navigate('/notfound')} className="mode-btn disabled">НЕ КЛИКАТЬ</button>
+                <button onClick={() => navigate('/notfound')} className="mode-btn disabled">Не кликать!</button>
               </div>
             </div>
 

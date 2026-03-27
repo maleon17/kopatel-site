@@ -87,7 +87,7 @@ export default function GamesPage() {
                     <span className="stat-value">2025</span>
                   </div>
                 </div>
-                <button onClick={() => navigate('/notfound')} className="game-btn disabled">НЕ НАЖИМАТЬ</button>
+                <button onClick={() => navigate('/notfound')} className="game-btn disabled">Не кликать!</button>
               </div>
             </div>
           </div>
