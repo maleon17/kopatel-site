@@ -75,13 +75,14 @@ header .container {
 .behind-scenes {
     padding: 100px 0;
     background: rgba(0, 0, 0, 0.4);
-    text-align: center;
+    text-align: left;
 }
 
-.behind-scenes h2 {
+.section-title {
     font-size: clamp(24px, 5vw, 42px);
     color: #2ecc71;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .section-subtitle {
@@ -90,13 +91,54 @@ header .container {
     margin-bottom: 50px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    text-align: center;
+}
+
+/* Team Sections */
+.team-section {
+    margin-bottom: 60px;
+}
+
+.team-section:last-child {
+    margin-bottom: 0;
+}
+
+.team-section-title {
+    font-size: clamp(20px, 4vw, 28px);
+    color: #fff;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-marker {
+    display: inline-block;
+    width: 4px;
+    height: 28px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.core-marker {
+    background: linear-gradient(180deg, #f39c12, #e67e22);
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+}
+
+.tlb-marker {
+    background: linear-gradient(180deg, #2ecc71, #27ae60);
+    box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+}
+
+.thanks-marker {
+    background: linear-gradient(180deg, #9b59b6, #8e44ad);
+    box-shadow: 0 0 10px rgba(155, 89, 182, 0.5);
 }
 
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
-    margin-bottom: 60px;
 }
 
 .team-card {
@@ -112,6 +154,39 @@ header .container {
     border-color: #2ecc71;
     background: rgba(46, 204, 113, 0.1);
     transform: translateY(-4px);
+}
+
+/* Core Card - Enhanced Visual Dominance */
+.core-card {
+    background: rgba(243, 156, 18, 0.08);
+    border: 2px solid rgba(243, 156, 18, 0.4);
+    box-shadow: 0 0 20px rgba(243, 156, 18, 0.15);
+    position: relative;
+}
+
+.core-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #f39c12, #e67e22);
+    border-radius: 12px 12px 0 0;
+}
+
+.core-card:hover {
+    border-color: #f39c12;
+    background: rgba(243, 156, 18, 0.12);
+    box-shadow: 0 0 30px rgba(243, 156, 18, 0.25);
+}
+
+.core-nick {
+    font-size: 20px;
+    background: linear-gradient(90deg, #f39c12, #e67e22);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .team-nick {
@@ -135,7 +210,33 @@ header .container {
     line-height: 1.6;
 }
 
-/* Благодарность */
+/* Special Thanks - Tag Cloud */
+.thanks-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.thanks-tag {
+    background: linear-gradient(135deg, rgba(155, 89, 182, 0.15), rgba(142, 68, 173, 0.15));
+    border: 1px solid rgba(155, 89, 182, 0.4);
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #d2b4de;
+    transition: all 0.3s ease;
+}
+
+.thanks-tag:hover {
+    background: linear-gradient(135deg, rgba(155, 89, 182, 0.25), rgba(142, 68, 173, 0.25));
+    border-color: #9b59b6;
+    box-shadow: 0 0 15px rgba(155, 89, 182, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Old thanks styles - keep for backward compatibility */
 .thanks-block {
     border-top: 1px solid rgba(255,255,255,0.1);
     padding-top: 40px;
@@ -169,6 +270,7 @@ header .container {
 @media (max-width: 768px) {
     .team-grid { grid-template-columns: 1fr; }
     .behind-scenes { padding: 60px 0; }
+    .thanks-cloud { justify-content: center; }
 }
 
 /* Общие услуги — нет товаров */

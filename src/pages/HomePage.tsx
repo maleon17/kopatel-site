@@ -1,25 +1,36 @@
 import Footer from '../components/Footer';
 
-const teamMembers = [
-  { nick: 'slastica', role: 'Владелец / Основатель', desc: 'Основал проект, определяет его направление и обеспечивает развитие платформы.' },
-  { nick: 'maleon17', role: 'Админ / Разработчик', desc: 'Создал главного бота, бота поддержки и мод на верификацию.' },
-  { nick: 'UlanaFo', role: 'Админ / Строитель', desc: 'Декорировал здания — школу и жилые дома.' },
-  { nick: 'bibidistra', role: 'Разработчик / Строитель', desc: 'Создал сайт проекта, участвовал в строительстве, делал и расставлял NPC по карте.' },
-  { nick: 'TamerlanKumys', role: 'Админ / Разработчик / Строитель', desc: 'Участвовал в разработке ботов и мода, перенёс всю карту на сервер. Первый инвестор.' },
-  { nick: 'J0J0Bro', role: 'Билдер', desc: 'Реставрировал старые постройки, чинил дороги, застраивал кратеры.' },
-  { nick: 'danlk228567', role: 'Строитель', desc: 'Участвовал в декорировании зданий.' },
-  { nick: 'Caxarocek', role: 'Тех-админ / Разработчик', desc: 'Чистит сервер и моды от багов. Держит всё в рабочем состоянии.' },
-  { nick: 'Coolcant', role: 'Строитель', desc: 'Построил масштабную сеть канализаций под городом.' },
-  { nick: 'Nexlorin', role: 'Строитель / Художник', desc: 'Создал логотип для главного меню сборки, участвовал в строительстве.' },
-  { nick: 'Ромчик Guliash', role: 'Донатер / Тестер', desc: 'Искал баги, активно участвовал в жизни сервера.' },
-  { nick: 'RoguePrime20', role: 'Билдер', desc: 'Декорировал здания и редактировал карту.' },
-  { nick: 'Kaktus', role: 'Пиарщик / Строитель', desc: 'Участвовал в раскрутке сервера и помогал строить.' },
-  { nick: 'hisvas', role: 'Билдер / Разработчик', desc: 'Делает карту и NPC.' },
+type TeamMember = {
+  nick: string;
+  role: string;
+  desc: string;
+  groups: string[];
+};
+
+const teamMembers: TeamMember[] = [
+  // Core Team
+  { nick: 'slastica', role: 'Владелец / Основатель', desc: 'Основал проект, определяет его направление и обеспечивает развитие платформы.', groups: ['core'] },
+  { nick: 'maleon17', role: 'Админ / Разработчик', desc: 'Создал главного бота, бота поддержки и мод на верификацию. Отвечает за ботов, авторизацию и сайт.', groups: ['core'] },
+  { nick: 'bibidistra', role: 'Разработчик', desc: 'Создал сайт проекта, участвовал в строительстве, делал и расставлял NPC по карте.', groups: ['core', 'tlb'] },
+  { nick: 'TamerlanKumys', role: 'Разработчик / Первый инвестор', desc: 'Участвовал в разработке ботов и мода, перенёс всю карту на сервер. Первый инвестор.', groups: ['core'] },
+  { nick: 'Caxarocek', role: 'Тех-админ / Разработчик', desc: 'Чистит сервер и моды от багов. Держит всё в рабочем состоянии. Создает кастомные моды.', groups: ['core', 'tlb'] },
+  // Server Team (The Lost Beyond)
+  { nick: 'hisvas', role: 'Билдер / Разработчик', desc: 'Делает карту и NPC.', groups: ['tlb'] },
+  { nick: 'UlanaFo', role: 'Строитель', desc: 'Декорировал здания — школу и жилые дома.', groups: ['tlb'] },
+  { nick: 'J0J0Bro', role: 'Билдер', desc: 'Реставрировал старые постройки, чинил дороги, застраивал кратеры.', groups: ['tlb'] },
+  { nick: 'danlk228567', role: 'Строитель', desc: 'Участвовал в декорировании зданий.', groups: ['tlb'] },
+  { nick: 'Coolcant', role: 'Строитель', desc: 'Построил масштабную сеть канализаций под городом.', groups: ['tlb'] },
+  { nick: 'RoguePrime20', role: 'Билдер', desc: 'Декорировал здания и редактировал карту.', groups: ['tlb'] },
+  { nick: 'Nexlorin', role: 'Художник', desc: 'Создал логотип для главного меню сборки, участвовал в строительстве.', groups: ['tlb'] },
+  { nick: 'Kaktus', role: 'Пиарщик / Строитель', desc: 'Участвовал в раскрутке сервера и помогал строить.', groups: ['tlb'] },
 ];
 
-const thanks = ['sysle4ek', 'kitmoma', 'ezrealai', 'Dragon'];
+const specialThanks = ['Ромчик Guliash', 'sysle4ek', 'kitmoma', 'ezrealai', 'Dragon'];
 
 export default function HomePage() {
+  const coreTeam = teamMembers.filter(m => m.groups.includes('core'));
+  const serverTeam = teamMembers.filter(m => m.groups.includes('tlb'));
+
   return (
     <>
       <section className="hero" id="home">
@@ -47,22 +58,52 @@ export default function HomePage() {
 
       <section className="behind-scenes" id="team">
         <div className="container">
-          <h2>За кулисами</h2>
-          <p className="section-subtitle">Люди, которые это сделали</p>
-          <div className="team-grid">
-            {teamMembers.map((m) => (
-              <div className="team-card" key={m.nick}>
-                <div className="team-nick">{m.nick}</div>
-                <div className="team-role">{m.role}</div>
-                <div className="team-desc">{m.desc}</div>
-              </div>
-            ))}
+          <h2 className="section-title">За кулисами</h2>
+          <p className="section-subtitle">Люди, которые оживили проект</p>
+
+          {/* Core Team Section */}
+          <div className="team-section">
+            <h3 className="team-section-title">
+              <span className="section-marker core-marker"></span>
+              Те, кто всё придумал и запустил
+            </h3>
+            <div className="team-grid">
+              {coreTeam.map((m) => (
+                <div className="team-card core-card" key={m.nick}>
+                  <div className="team-nick core-nick">{m.nick}</div>
+                  <div className="team-role">{m.role}</div>
+                  <div className="team-desc">{m.desc}</div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="thanks-block">
-            <h3>Отдельная благодарность</h3>
-            <div className="thanks-list">
-              {thanks.map((t) => (
-                <span className="thanks-nick" key={t}>{t}</span>
+
+          {/* Server Team Section */}
+          <div className="team-section">
+            <h3 className="team-section-title">
+              <span className="section-marker tlb-marker"></span>
+              Те, кто создавал мир Lost Beyond
+            </h3>
+            <div className="team-grid">
+              {serverTeam.map((m) => (
+                <div className="team-card" key={m.nick}>
+                  <div className="team-nick">{m.nick}</div>
+                  <div className="team-role">{m.role}</div>
+                  <div className="team-desc">{m.desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Special Thanks Section */}
+          <div className="team-section">
+            <h3 className="team-section-title">
+              <span className="section-marker thanks-marker"></span>
+              Отдельное спасибо
+            </h3>
+            <div className="thanks-cloud">
+              {specialThanks.map((name) => (
+                <span className="thanks-tag" key={name}>{name}</span>
               ))}
             </div>
           </div>
