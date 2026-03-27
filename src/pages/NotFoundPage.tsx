@@ -83,30 +83,27 @@ export default function NotFoundPage() {
       <div className="not-found-content">
         <div className="not-found-status">
           <span className="dot red-dot"></span>
-          <span>ЗОНА НЕ НАЙДЕНА</span>
+          <span>DATA_CORRUPTION</span>
         </div>
 
         <div className="glitch-wrapper">
           <h1 className="glitch" data-text="404">404</h1>
         </div>
 
-        <p className="not-found-subtitle">Эта территория не существует</p>
-        <p className="not-found-desc">
-          Вы зашли в заброшенную зону. Здесь нет ничего, кроме пыли и обломков.
-        </p>
+        <p className="not-found-subtitle">Похоже, этот сегмент данных провалился сквозь текстуры веба. Мы отправили поисковый отряд, но они нашли только этот глитч.</p>
 
         <div className="not-found-actions">
           <button className="not-found-btn" onClick={() => navigate('/')}>
-            ⚔️ Вернуться на базу
+            ТЕЛЕПОРТ В ЛОББИ
           </button>
           <button className="not-found-btn secondary" onClick={() => navigate(-1)}>
-            ← Назад
+            ВЕРНУТЬСЯ В ТОЧКУ СМЕРТИ
           </button>
         </div>
 
         <div className="not-found-countdown">
           <span className="dot"></span>
-          Автоматическое возвращение через <strong>{countdown}</strong> сек...
+          Автоматический респаун в лобби через <strong>{countdown}</strong> сек...
         </div>
       </div>
     </div>
