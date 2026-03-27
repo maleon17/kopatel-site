@@ -11,7 +11,7 @@ import './index.css';
 
 export default function App() {
   return (
-    <BrowserRouter basename="/kopatel-site">
+    <BrowserRouter basename="/Kopatel.platform">
       <Routes>
         <Route path="/" element={<><Header /><HomePage /></>} />
         <Route path="/games" element={<><Header /><GamesPage /></>} />
