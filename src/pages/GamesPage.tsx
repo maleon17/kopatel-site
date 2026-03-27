@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 export default function GamesPage() {
+  const navigate = useNavigate();
   const [online, setOnline] = useState<string>('0');
 
   useEffect(() => {
@@ -71,7 +72,7 @@ export default function GamesPage() {
               </div>
               <div className="game-info">
                 <h3>Coming Soon</h3>
-                <p>Новые проекты уже в разработке! Следите за обновлениями в нашем Telegram канале.</p>
+                <p>Новые измерения уже на подходе, главное — не трогать серую кнопку...</p>
                 <div className="game-features">
                   <span className="feature">Тайна</span>
                   <span className="feature">2025</span>
@@ -86,7 +87,7 @@ export default function GamesPage() {
                     <span className="stat-value">2025</span>
                   </div>
                 </div>
-                <a href="https://t.me/copalpal" target="_blank" rel="noreferrer" className="game-btn disabled">Следить</a>
+                <button onClick={() => navigate('/notfound')} className="game-btn disabled">НЕ НАЖИМАТЬ</button>
               </div>
             </div>
           </div>

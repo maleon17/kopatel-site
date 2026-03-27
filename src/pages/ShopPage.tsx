@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 export default function ShopPage() {
+  const navigate = useNavigate();
   return (
     <>
       <section className="hero shop-hero">
@@ -48,13 +49,13 @@ export default function ShopPage() {
               </div>
               <div className="mode-info">
                 <h3>Новый Режим</h3>
-                <p>Совершенно новый игровой режим уже в разработке! Следите за обновлениями в нашем Telegram канале.</p>
+                <p>Товары этого измерения еще не материализовались. Попытка покупки может привести к дестабилизации реальности.</p>
                 <div className="mode-features">
                   <span className="feature">Тайна</span>
                   <span className="feature">2026</span>
                   <span className="feature">Скоро</span>
                 </div>
-                <a href="https://t.me/copalpal" target="_blank" rel="noreferrer" className="mode-btn disabled">Следить</a>
+                <button onClick={() => navigate('/notfound')} className="mode-btn disabled">НЕ КЛИКАТЬ</button>
               </div>
             </div>
 
