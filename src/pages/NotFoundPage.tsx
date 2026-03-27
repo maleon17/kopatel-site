@@ -91,7 +91,7 @@ export default function NotFoundPage() {
         </div>
 
         <h2 className="not-found-title text-white text-2xl font-bold mt-4 mb-2">ОШИБКА КОДА РЕАЛЬНОСТИ</h2>
-        <p className="not-found-subtitle text-gray-400 opacity-60">Похоже, этот сегмент данных провалился сквозь текстуры веба. Мы отправили поисковый отряд, но они нашли только этот глитч.</p>
+        <p className="not-found-subtitle text-white/50 text-sm max-w-md">Похоже, этот сегмент данных провалился сквозь текстуры веба. Мы отправили поисковый отряд, но они нашли только этот глитч.</p>
 
         <div className="not-found-actions">
           <button className="not-found-btn" onClick={() => navigate('/')}>
