@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { UserData, getSession, setSession, clearSession } from '../utils/auth';
+import AccountDropdown from './AccountDropdown';
+import LoginModal from './LoginModal';
 
 const TgIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -10,6 +13,15 @@ const TgIcon = () => (
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [user, setUser] = useState<UserData | null>(getSession());
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const location = useLocation();
+
+  // Close dropdown on navigation
+  useEffect(() => {
+    setDropdownOpen(false);
+  }, [location]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -55,6 +67,18 @@ export default function Header() {
     return () => document.removeEventListener('click', handler);
   }, []);
 
+  const handleLogout = () => {
+    clearSession();
+    setUser(null);
+    setDropdownOpen(false);
+  };
+
+  const handleLoginSuccess = (userData: UserData) => {
+    setSession(userData);
+    setUser(userData);
+    setDropdownOpen(false);
+  };
+
   return (
     <>
       <header>
@@ -81,6 +105,28 @@ export default function Header() {
               </ul>
             </nav>
             <Link to="/games" className="nav-btn mobile-play-btn">Играть</Link>
+            <div className="account-button-wrapper">
+              <button
+                className="account-btn"
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                aria-label="Аккаунт"
+              >
+                <img
+                  src={user ? `https://minotar.net/face/${user.minecraft}/32` : 'https://minotar.net/face/steve/32'}
+                  alt={user ? user.minecraft : 'Steve'}
+                />
+              </button>
+              <AccountDropdown
+                user={user}
+                isOpen={dropdownOpen}
+                onClose={() => setDropdownOpen(false)}
+                onOpenLogin={() => {
+                  setDropdownOpen(false);
+                  setLoginModalOpen(true);
+                }}
+                onLogout={handleLogout}
+              />
+            </div>
           </div>
         </div>
       </header>
@@ -150,6 +196,12 @@ export default function Header() {
           </div>
         </div>
       )}
+
+      <LoginModal
+        isOpen={loginModalOpen}
+        onClose={() => setLoginModalOpen(false)}
+        onLoginSuccess={handleLoginSuccess}
+      />
     </>
   );
 }

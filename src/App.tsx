@@ -7,6 +7,7 @@ import TheLostBeyondPage from './pages/TheLostBeyondPage';
 import ShopPage from './pages/ShopPage';
 import TLBShopPage from './pages/TLBShopPage';
 import GeneralServicesPage from './pages/GeneralServicesPage';
+import AccountPage from './pages/AccountPage';
 import NotFoundPage from './pages/NotFoundPage';
 import './index.css';
 
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/shop" element={<><Header /><ShopPage /></>} />
         <Route path="/the-lost-beyond-shop" element={<><Header /><TLBShopPage /></>} />
         <Route path="/general-services" element={<><Header /><GeneralServicesPage /></>} />
+        <Route path="/account" element={<><Header /><AccountPage /></>} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
