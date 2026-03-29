@@ -2833,6 +2833,7 @@ footer {
 .dropdown-avatar img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
     image-rendering: pixelated;
 }
 
@@ -2846,6 +2847,10 @@ footer {
     font-weight: 700;
     color: #fff;
     margin-bottom: 4px;
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .dropdown-telegram {
@@ -3365,25 +3370,24 @@ footer {
 .payments-list {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    max-height: 400px;
+    max-height: 300px;
     overflow-y: auto;
+    padding-right: 4px;
 }
 
 .payment-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 8px;
     transition: all 0.2s ease;
 }
 
 .payment-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(46, 204, 113, 0.2);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .payment-info {
@@ -3393,14 +3397,14 @@ footer {
 }
 
 .payment-date {
-    font-size: 14px;
+    font-size: 12px;
     color: #888;
 }
 
 .payment-type {
-    font-size: 15px;
-    color: #fff;
+    font-size: 14px;
     font-weight: 600;
+    color: #fff;
 }
 
 .payment-meta {
@@ -3411,30 +3415,30 @@ footer {
 }
 
 .payment-amount {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
-    color: #f39c12;
+    color: #f1c40f;
 }
 
 .payment-status {
     font-size: 12px;
-    padding: 4px 10px;
-    border-radius: 20px;
+    padding: 2px 8px;
+    border-radius: 12px;
     font-weight: 600;
 }
 
 .payment-status-pending {
-    background: rgba(241, 196, 15, 0.15);
+    background: rgba(241, 196, 15, 0.2);
     color: #f1c40f;
 }
 
 .payment-status-completed {
-    background: rgba(46, 204, 113, 0.15);
+    background: rgba(46, 204, 113, 0.2);
     color: #2ecc71;
 }
 
 .payment-status-rejected {
-    background: rgba(231, 76, 60, 0.15);
+    background: rgba(231, 76, 60, 0.2);
     color: #e74c3c;
 }
 

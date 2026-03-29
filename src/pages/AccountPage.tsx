@@ -18,13 +18,7 @@ const factionColors: Record<string, string> = {
 };
 
 // Decode field with surrogate pairs
-const decodeField = (str: string): string => {
-  try {
-    return decodeURIComponent(escape(str));
-  } catch {
-    return str;
-  }
-};
+const decodeField = (str: string): string => str;
 
 export default function AccountPage() {
   const navigate = useNavigate();
@@ -97,18 +91,18 @@ export default function AccountPage() {
   const statusText = isBanned ? 'Забанен' : 'Активен';
   const statusColor = isBanned ? '#e74c3c' : '#2ecc71';
 
-  // Get faction info with decoding
+  // Get faction info
   const factionRaw = user?.faction || '';
-  const factionDecoded = decodeField(factionRaw);
-  const factionEmoji = factionDecoded.match(/^[🔵🔴]/)?.[0] || '';
-  const factionName = factionDecoded.replace(/^[🔵🔴]\s*/, '');
-  const factionColor = factionColors[factionDecoded] || 'default';
+  const factionParts = factionRaw.split(' ');
+  const factionEmoji = factionParts[0] || '';
+  const factionName = factionParts.slice(1).join(' ');
+  const factionColor = factionColors[factionRaw] || 'default';
 
-  // Get kit info with decoding
+  // Get kit info
   const kitRaw = user?.kit || '';
-  const kitDecoded = decodeField(kitRaw);
-  const kitEmoji = kitDecoded.match(/^[🛡️⚔️🏹🪄]/)?.[0] || '🎮';
-  const kitName = kitDecoded.replace(/^[🛡️⚔️🏹🪄]\s*/, '');
+  const kitParts = kitRaw.split(' ');
+  const kitEmoji = kitParts[0] || '🎮';
+  const kitName = kitParts.slice(1).join(' ');
 
   // Ender chest slots
   const enderChestSlots = user?.ender_chest_slots ?? 1;

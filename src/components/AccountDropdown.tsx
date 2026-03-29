@@ -44,7 +44,7 @@ export default function AccountDropdown({
         <div className="dropdown-content">
           <div className="dropdown-avatar">
             <img
-              src={`https://minotar.net/face/${user.minecraft}/64`}
+              src={`${import.meta.env.VITE_FLASK_URL}/skin/face/${user.minecraft}`}
               alt={user.minecraft}
             />
           </div>
