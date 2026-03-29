@@ -1957,9 +1957,9 @@ footer {
 
 /* PAYMENT INFO */
 .payment-info {
-    padding: 100px 0;
-    background: rgba(0, 0, 0, 0.3);
-    text-align: center;
+    padding: 0;
+    background: transparent;
+    text-align: inherit;
 }
 
 .payment-info h2 {
@@ -3413,6 +3413,7 @@ footer {
     padding: 6px 10px;
     background: rgba(255,255,255,0.05);
     border-radius: 8px;
+    column-gap: 8px;
 }
 
 .payment-info {
