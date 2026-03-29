@@ -82,7 +82,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
 
       const data = await response.json();
       if (data.success && data.user) {
-        setFoundUser(data.user);
+        setFoundUser({ ...data.user, payments: data.payments || [] });
         setAccountStatus('found');
       } else {
         setFoundUser(null);
