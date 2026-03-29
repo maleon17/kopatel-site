@@ -3,6 +3,27 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: #2ecc71 rgba(255,255,255,0.05);
+}
+
+*::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+*::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+    border-radius: 2px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #2ecc71;
+    border-radius: 2px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: #27ae60;
 }
 
 body {
@@ -3378,27 +3399,10 @@ footer {
 .payments-list {
     display: flex;
     flex-direction: column;
+    gap: 6px;
     max-height: 280px;
     overflow-y: auto;
     padding-right: 4px;
-}
-
-.payments-list::-webkit-scrollbar {
-    width: 4px;
-}
-
-.payments-list::-webkit-scrollbar-track {
-    background: rgba(255,255,255,0.05);
-    border-radius: 2px;
-}
-
-.payments-list::-webkit-scrollbar-thumb {
-    background: #2ecc71;
-    border-radius: 2px;
-}
-
-.payments-list::-webkit-scrollbar-thumb:hover {
-    background: #27ae60;
 }
 
 .payment-item {
@@ -3408,8 +3412,9 @@ footer {
     padding: 10px 14px;
     background: rgba(255,255,255,0.05);
     border-radius: 8px;
-    margin-bottom: 6px;
     gap: 12px;
+    min-height: unset;
+    height: auto;
 }
 
 .payment-info {
@@ -3417,17 +3422,20 @@ footer {
     flex-direction: column;
     gap: 2px;
     flex: 1;
+    min-height: unset;
 }
 
 .payment-date {
     font-size: 11px;
     color: #666;
+    line-height: 1.2;
 }
 
 .payment-type {
     font-size: 14px;
     font-weight: 600;
     color: #fff;
+    line-height: 1.2;
 }
 
 .payment-meta {
@@ -3436,6 +3444,7 @@ footer {
     align-items: flex-end;
     gap: 4px;
     flex-shrink: 0;
+    min-height: unset;
 }
 
 .payment-amount {
@@ -3449,6 +3458,7 @@ footer {
     padding: 2px 8px;
     border-radius: 10px;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .payment-status-pending {
