@@ -3406,20 +3406,19 @@ footer {
 }
 
 .payment-item {
-    display: grid;
-    grid-template-columns: 1fr auto;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 6px 10px;
     background: rgba(255,255,255,0.05);
     border-radius: 8px;
+    width: 100%;
 }
 
 .payment-info {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-    min-width: 0;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .payment-date {
