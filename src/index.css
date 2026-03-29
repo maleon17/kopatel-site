@@ -3409,20 +3409,18 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 14px;
+    padding: 8px 12px;
     background: rgba(255,255,255,0.05);
     border-radius: 8px;
     gap: 12px;
-    min-height: unset;
-    height: auto;
+    width: 100%;
 }
 
 .payment-info {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    flex: 1;
-    min-height: unset;
+    min-width: 0;
 }
 
 .payment-date {
@@ -3444,7 +3442,6 @@ footer {
     align-items: flex-end;
     gap: 4px;
     flex-shrink: 0;
-    min-height: unset;
 }
 
 .payment-amount {
