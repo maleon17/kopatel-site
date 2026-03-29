@@ -133,7 +133,7 @@ export default function AccountPage() {
   // Skin URL based on system
   const skinLink = skinSystem === 'elyby'
     ? 'https://ely.by/skins'
-    : 'https://tl-skins.ru/';
+    : 'https://tlauncher.org/en/catalog/skins/';
 
   // Get payments from user
   const payments = user?.payments || [];
