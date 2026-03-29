@@ -3403,24 +3403,24 @@ footer {
     max-height: 280px;
     overflow-y: auto;
     padding-right: 4px;
-    align-items: flex-start;
 }
 
 .payment-item {
-    display: inline-flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 6px 10px;
     background: rgba(255,255,255,0.05);
     border-radius: 8px;
     gap: 16px;
-    white-space: nowrap;
+    width: 100%;
 }
 
 .payment-info {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    flex: 0 1 auto;
 }
 
 .payment-date {
@@ -3439,6 +3439,7 @@ footer {
     flex-direction: column;
     align-items: flex-end;
     gap: 4px;
+    flex-shrink: 0;
 }
 
 .payment-amount {
