@@ -149,7 +149,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
           banned: foundUser.banned,
           ender_chest_slots: foundUser.ender_chest_slots,
           skin_system: 'elyby',
-          payments: foundUser.payments,
+          payments: foundUser.payments || [],
         };
         onLoginSuccess(userData);
         handleClose();

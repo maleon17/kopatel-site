@@ -52,9 +52,7 @@ export default function AccountPage() {
       viewerRef.current = null;
     }
 
-    const skinUrl = skinSystem === 'elyby'
-      ? `https://skinsystem.ely.by/skins/${user.minecraft}.png`
-      : `https://tlskins.net/skins/${user.minecraft}.png`;
+    const skinUrl = `https://minotar.net/skin/${user.minecraft}`;
 
     viewerRef.current = new SkinViewer({
       canvas: canvasRef.current,
