@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { UserData } from '../utils/auth';
+import { UserData, Payment } from '../utils/auth';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -15,13 +15,7 @@ interface BaseUser {
   kit: string;
   banned: boolean;
   ender_chest_slots?: number;
-  payments?: Array<{
-    telegram_id: number;
-    date: string;
-    type: string;
-    amount: number;
-    status: 'pending' | 'completed' | 'rejected';
-  }>;
+  payments?: Payment[];
 }
 
 export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginModalProps) {
@@ -155,6 +149,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
           banned: foundUser.banned,
           ender_chest_slots: foundUser.ender_chest_slots,
           skin_system: 'elyby',
+          payments: foundUser.payments,
         };
         onLoginSuccess(userData);
         handleClose();

@@ -3,36 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { UserData, getSession, setSession } from '../utils/auth';
 import { SkinViewer, WalkingAnimation } from 'skinview3d';
 
-interface BaseUser {
-  telegram_id: number;
-  username: string;
-  minecraft: string;
-  faction: string;
-  kit: string;
-  banned: boolean;
-  ender_chest_slots?: number;
-  skin_system?: 'elyby' | 'tlauncher';
-  payments?: Array<{
-    telegram_id: number;
-    date: string;
-    type: string;
-    amount: number;
-    status: 'pending' | 'completed' | 'rejected';
-  }>;
-}
-
-interface Payment {
-  date: string;
-  type: string;
-  amount: number;
-  status: 'pending' | 'completed' | 'rejected';
-}
-
-const paymentTypeLabels: Record<string, string> = {
+const serviceNames: Record<string, string> = {
   unban: 'Разбан',
   faction_change: 'Смена фракции',
   kit_change: 'Смена кита',
-  ender_chest_both: 'Эндер-сундук (оба)',
+  ender_chest_both: 'Эндер-сундук (оба слота)',
   ender_chest_1: 'Эндер-сундук (2й слот)',
   ender_chest_2: 'Эндер-сундук (3й слот)',
 };
@@ -42,18 +17,23 @@ const factionColors: Record<string, string> = {
   '🔴 Красные': 'red',
 };
 
+// Decode field with surrogate pairs
+const decodeField = (str: string): string => {
+  try {
+    return decodeURIComponent(escape(str));
+  } catch {
+    return str;
+  }
+};
+
 export default function AccountPage() {
   const navigate = useNavigate();
   const [user, setUser] = useState<UserData | null>(getSession());
   const [skinSystem, setSkinSystem] = useState<'elyby' | 'tlauncher'>(
     user?.skin_system || 'elyby'
   );
-  const [skinUrl, setSkinUrl] = useState('');
-  const [skinError, setSkinError] = useState(false);
-  const [payments, setPayments] = useState<Payment[]>([]);
-  const [baseUser, setBaseUser] = useState<BaseUser | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const viewerRef = useRef<SkinViewer | null>(null);
-  const skinContainerRef = useRef<HTMLDivElement>(null);
 
   // Redirect if not logged in
   useEffect(() => {
@@ -62,66 +42,9 @@ export default function AccountPage() {
     }
   }, [user, navigate]);
 
-  // Load base.jsonc for payments
-  useEffect(() => {
-    if (!user) return;
-
-    const loadBaseData = async () => {
-      try {
-        const token = import.meta.env.VITE_GITHUB_TOKEN;
-        const response = await fetch(
-          'https://api.github.com/repos/maleon17/kopatel_bot/contents/base.jsonc',
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              Accept: 'application/vnd.github.v3+json',
-            },
-          }
-        );
-
-        if (!response.ok) return;
-
-        const data = await response.json();
-        const content = atob(data.content);
-        const jsonContent = content.replace(/\/\/.*$/gm, '');
-        const baseData = JSON.parse(jsonContent) as { users: BaseUser[] };
-
-        const foundUser = baseData.users.find(
-          (u) => u.telegram_id === user.telegram_id
-        );
-
-        if (foundUser) {
-          setBaseUser(foundUser);
-          if (foundUser.payments) {
-            const userPayments = foundUser.payments.filter(
-              (p) => p.telegram_id === user.telegram_id
-            );
-            setPayments(userPayments);
-          }
-        }
-      } catch (error) {
-        console.error('Load base data error:', error);
-      }
-    };
-
-    loadBaseData();
-  }, [user]);
-
-  // Update skin URL when skinSystem or user changes
-  useEffect(() => {
-    if (!user) return;
-
-    setSkinError(false);
-    const url =
-      skinSystem === 'elyby'
-        ? `https://skinsystem.ely.by/skins/${user.minecraft}.png`
-        : `https://tlskins.net/skins/${user.minecraft}.png`;
-    setSkinUrl(url);
-  }, [user, skinSystem]);
-
   // Initialize 3D skin viewer
   useEffect(() => {
-    if (!skinContainerRef.current || skinError) return;
+    if (!canvasRef.current || !user) return;
 
     // Clean up previous viewer
     if (viewerRef.current) {
@@ -129,44 +52,35 @@ export default function AccountPage() {
       viewerRef.current = null;
     }
 
-    const skinUrlToUse = skinError
-      ? undefined
-      : skinUrl;
+    const skinUrl = skinSystem === 'elyby'
+      ? `https://skinsystem.ely.by/skins/${user.minecraft}.png`
+      : `https://tlskins.net/skins/${user.minecraft}.png`;
 
     viewerRef.current = new SkinViewer({
-      canvas: skinContainerRef.current,
+      canvas: canvasRef.current,
       width: 300,
       height: 400,
-      skin: skinUrlToUse,
-      animation: new WalkingAnimation(),
+      skin: skinUrl,
     });
+
+    viewerRef.current.animation = new WalkingAnimation();
+    viewerRef.current.animation.speed = 0.8;
+    viewerRef.current.autoRotate = false;
 
     // Mouse tracking
     const handleMouseMove = (e: MouseEvent) => {
       if (!viewerRef.current) return;
-      const x = (e.clientX / window.innerWidth) * 2 - 1;
-      viewerRef.current.rotation.y = x * 0.5;
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      viewerRef.current.playerObject.rotation.y = x * 0.5;
     };
-
     window.addEventListener('mousemove', handleMouseMove);
 
     return () => {
+      viewerRef.current?.dispose();
+      viewerRef.current = null;
       window.removeEventListener('mousemove', handleMouseMove);
-      if (viewerRef.current) {
-        viewerRef.current.dispose();
-        viewerRef.current = null;
-      }
     };
-  }, [skinUrl, skinError]);
-
-  // Handle skin load error
-  const handleSkinError = () => {
-    setSkinError(true);
-    // Load default Steve skin
-    if (viewerRef.current) {
-      viewerRef.current.skin = undefined;
-    }
-  };
+  }, [user?.minecraft, skinSystem]);
 
   // Update skin system
   const handleSkinSystemChange = (system: 'elyby' | 'tlauncher') => {
@@ -178,34 +92,23 @@ export default function AccountPage() {
     }
   };
 
-  // Format date
-  const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr);
-    const months = [
-      'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
-      'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
-    ];
-    const day = date.getDate();
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-    return `${day} ${month} ${year}`;
-  };
-
   // Get status
   const isBanned = user?.banned || false;
   const statusText = isBanned ? 'Забанен' : 'Активен';
   const statusColor = isBanned ? '#e74c3c' : '#2ecc71';
 
-  // Get faction info
+  // Get faction info with decoding
   const factionRaw = user?.faction || '';
-  const factionEmoji = factionRaw.match(/^[🔵🔴]/)?.[0] || '';
-  const factionName = factionRaw.replace(/^[🔵🔴]\s*/, '');
-  const factionColor = factionColors[factionRaw] || 'default';
+  const factionDecoded = decodeField(factionRaw);
+  const factionEmoji = factionDecoded.match(/^[🔵🔴]/)?.[0] || '';
+  const factionName = factionDecoded.replace(/^[🔵🔴]\s*/, '');
+  const factionColor = factionColors[factionDecoded] || 'default';
 
-  // Get kit info
+  // Get kit info with decoding
   const kitRaw = user?.kit || '';
-  const kitEmoji = kitRaw.match(/^[🛡️⚔️🏹🪄]/)?.[0] || '🎮';
-  const kitName = kitRaw.replace(/^[🛡️⚔️🏹🪄]\s*/, '');
+  const kitDecoded = decodeField(kitRaw);
+  const kitEmoji = kitDecoded.match(/^[🛡️⚔️🏹🪄]/)?.[0] || '🎮';
+  const kitName = kitDecoded.replace(/^[🛡️⚔️🏹🪄]\s*/, '');
 
   // Ender chest slots
   const enderChestSlots = user?.ender_chest_slots ?? 1;
@@ -216,6 +119,18 @@ export default function AccountPage() {
   const skinLink = skinSystem === 'elyby'
     ? 'https://ely.by/skins'
     : 'https://tl-skins.ru/';
+
+  // Get payments from user
+  const payments = user?.payments || [];
+
+  // Format date
+  const formatDate = (dateStr: string) => {
+    return new Date(dateStr).toLocaleDateString('ru-RU', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    });
+  };
 
   if (!user) return null;
 
@@ -243,15 +158,7 @@ export default function AccountPage() {
 
             {/* 3D Skin Viewer */}
             <div className="skin-viewer-wrapper">
-              <canvas ref={skinContainerRef} className="skin-canvas" />
-              {skinError && (
-                <div className="skin-error-fallback">
-                  <img
-                    src="https://minotar.net/body/steve/150"
-                    alt="Steve"
-                  />
-                </div>
-              )}
+              <canvas ref={canvasRef} className="skin-canvas" />
             </div>
 
             {/* Change skin button */}
@@ -319,12 +226,12 @@ export default function AccountPage() {
               <p className="empty-text">История платежей пуста</p>
             ) : (
               <div className="payments-list">
-                {payments.map((payment, index) => (
-                  <div key={index} className="payment-item">
+                {payments.map((payment) => (
+                  <div key={payment.payment_id} className="payment-item">
                     <div className="payment-info">
-                      <span className="payment-date">{formatDate(payment.date)}</span>
+                      <span className="payment-date">{formatDate(payment.created_at)}</span>
                       <span className="payment-type">
-                        {paymentTypeLabels[payment.type] || payment.type}
+                        {serviceNames[payment.service_type] || payment.service_type}
                       </span>
                     </div>
                     <div className="payment-meta">
