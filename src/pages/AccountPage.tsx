@@ -52,7 +52,9 @@ export default function AccountPage() {
       viewerRef.current = null;
     }
 
-    const skinUrl = `https://minotar.net/skin/${user.minecraft}`;
+    const skinUrl = skinSystem === 'elyby'
+      ? `${import.meta.env.VITE_FLASK_URL}/skin/${user.minecraft}`
+      : `${import.meta.env.VITE_FLASK_URL}/skin/${user.minecraft}`;
 
     viewerRef.current = new SkinViewer({
       canvas: canvasRef.current,
