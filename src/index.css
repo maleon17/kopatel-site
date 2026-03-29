@@ -3403,6 +3403,7 @@ footer {
     max-height: 280px;
     overflow-y: auto;
     padding-right: 4px;
+    align-items: flex-start;
 }
 
 .payment-item {
@@ -3413,6 +3414,7 @@ footer {
     background: rgba(255,255,255,0.05);
     border-radius: 8px;
     width: 100%;
+    height: fit-content;
 }
 
 .payment-info {
