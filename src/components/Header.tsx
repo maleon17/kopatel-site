@@ -114,7 +114,7 @@ export default function Header() {
                 <div
                   className="skin-face-btn"
                   style={{
-                    backgroundImage: `url(${user ? `${import.meta.env.VITE_FLASK_URL}/skin/${user.minecraft}` : 'https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/skin/Steve'})`,
+                    backgroundImage: `url(${user ? `https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/skin/${user.skin_system === 'tlauncher' ? 'tlauncher' : 'elyby'}/${user.minecraft}` : 'https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/skin/elyby/Steve'})`,
                   }}
                 />
               </button>

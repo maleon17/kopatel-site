@@ -17,9 +17,6 @@ const factionColors: Record<string, string> = {
   '🔴 Красные': 'red',
 };
 
-// Decode field with surrogate pairs
-const decodeField = (str: string): string => str;
-
 export default function AccountPage() {
   const navigate = useNavigate();
   const [user, setUser] = useState<UserData | null>(getSession());
@@ -46,9 +43,7 @@ export default function AccountPage() {
       viewerRef.current = null;
     }
 
-    const skinUrl = skinSystem === 'elyby'
-      ? `${import.meta.env.VITE_FLASK_URL}/skin/${user.minecraft}`
-      : `${import.meta.env.VITE_FLASK_URL}/skin/${user.minecraft}`;
+    const skinUrl = `https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/skin/${skinSystem === 'tlauncher' ? 'tlauncher' : 'elyby'}/${user.minecraft}`;
 
     viewerRef.current = new SkinViewer({
       canvas: canvasRef.current,

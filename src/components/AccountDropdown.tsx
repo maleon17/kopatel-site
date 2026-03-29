@@ -46,7 +46,7 @@ export default function AccountDropdown({
             <div
               className="skin-face-avatar"
               style={{
-                backgroundImage: `url(${import.meta.env.VITE_FLASK_URL}/skin/${user.minecraft})`,
+                backgroundImage: `url(https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/skin/${user.skin_system === 'tlauncher' ? 'tlauncher' : 'elyby'}/${user.minecraft})`,
               }}
             />
           </div>
@@ -71,7 +71,7 @@ export default function AccountDropdown({
             <div
               className="skin-face-avatar"
               style={{
-                backgroundImage: `url(https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/skin/Steve)`,
+                backgroundImage: `url(https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/skin/elyby/Steve)`,
               }}
             />
           </div>

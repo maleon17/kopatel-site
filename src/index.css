@@ -2783,13 +2783,26 @@ footer {
     transform: scale(1.05);
 }
 
+/* Аватарка лица скина — большая (дропдаун) */
+.skin-face-avatar {
+  width: 64px;
+  height: 64px;
+  background-size: 512px 512px;
+  background-position: -64px -64px;
+  image-rendering: pixelated;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* Аватарка лица скина — маленькая (хедер) */
 .skin-face-btn {
-    width: 32px;
-    height: 32px;
-    background-size: 256px 256px;
-    background-position: -32px -32px;
-    image-rendering: pixelated;
-    border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  background-size: 256px 256px;
+  background-position: -32px -32px;
+  image-rendering: pixelated;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 /* Account Dropdown */
@@ -2830,15 +2843,6 @@ footer {
     margin: 0 auto 16px;
     overflow: hidden;
     display: block;
-}
-
-.skin-face-avatar {
-    width: 64px;
-    height: 64px;
-    background-size: 512px 512px;
-    background-position: -64px -64px;
-    image-rendering: pixelated;
-    border-radius: 4px;
 }
 
 .dropdown-info {
