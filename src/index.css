@@ -3397,30 +3397,28 @@ footer {
 
 /* Payments list */
 .payments-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 4px;
     max-height: 280px;
     overflow-y: auto;
     padding-right: 4px;
-    align-items: flex-start;
 }
 
 .payment-item {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
     padding: 6px 10px;
     background: rgba(255,255,255,0.05);
     border-radius: 8px;
-    width: 100%;
-    height: fit-content;
 }
 
 .payment-info {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    min-width: 0;
 }
 
 .payment-date {
@@ -3441,7 +3439,7 @@ footer {
     flex-direction: row;
     align-items: center;
     gap: 8px;
-    flex-shrink: 0;
+    justify-self: end;
 }
 
 .payment-amount {
