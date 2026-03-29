@@ -111,9 +111,11 @@ export default function Header() {
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 aria-label="Аккаунт"
               >
-                <img
-                  src={user ? `https://minotar.net/face/${user.minecraft}/32` : 'https://minotar.net/face/steve/32'}
-                  alt={user ? user.minecraft : 'Steve'}
+                <div
+                  className="skin-face-btn"
+                  style={{
+                    backgroundImage: `url(${user ? `${import.meta.env.VITE_FLASK_URL}/skin/${user.minecraft}` : 'https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/skin/Steve'})`,
+                  }}
                 />
               </button>
               <AccountDropdown

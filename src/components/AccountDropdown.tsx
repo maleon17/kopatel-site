@@ -43,9 +43,11 @@ export default function AccountDropdown({
         // Logged in
         <div className="dropdown-content">
           <div className="dropdown-avatar">
-            <img
-              src={`${import.meta.env.VITE_FLASK_URL}/skin/face/${user.minecraft}`}
-              alt={user.minecraft}
+            <div
+              className="skin-face-avatar"
+              style={{
+                backgroundImage: `url(${import.meta.env.VITE_FLASK_URL}/skin/${user.minecraft})`,
+              }}
             />
           </div>
           <div className="dropdown-info">
@@ -66,9 +68,11 @@ export default function AccountDropdown({
         // Not logged in
         <div className="dropdown-content">
           <div className="dropdown-avatar">
-            <img
-              src="https://minotar.net/face/steve/64"
-              alt="Steve"
+            <div
+              className="skin-face-avatar"
+              style={{
+                backgroundImage: `url(https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/skin/Steve)`,
+              }}
             />
           </div>
           <div className="dropdown-info">
