@@ -3399,6 +3399,7 @@ footer {
 .payments-list {
     display: grid;
     grid-template-columns: 1fr;
+    grid-auto-rows: min-content;
     gap: 4px;
     max-height: 280px;
     overflow-y: auto;
