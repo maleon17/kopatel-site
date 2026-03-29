@@ -72,24 +72,13 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
       return;
     }
 
-    const token = import.meta.env.VITE_GITHUB_TOKEN;
-    if (!token) {
-      console.error('VITE_GITHUB_TOKEN is not set');
-      setFoundUser(null);
-      setAccountStatus('not_found');
-      return;
-    }
-
     try {
-      const response = await fetch(
-        'https://api.github.com/repos/maleon17/kopatel_bot/contents/base.jsonc',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: 'application/vnd.github.v3+json',
-          },
-        }
-      );
+      const flaskUrl = import.meta.env.VITE_FLASK_URL;
+      const response = await fetch(`${flaskUrl}/get_user`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ identifier: value.trim() }),
+      });
 
       if (!response.ok) {
         setFoundUser(null);
@@ -98,33 +87,8 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
       }
 
       const data = await response.json();
-      const content = atob(data.content);
-      // Remove potential JSONC comments (simple approach: remove // lines)
-      const jsonContent = content.replace(/\/\/.*$/gm, '');
-      const baseData = JSON.parse(jsonContent) as { users: BaseUser[] };
-
-      const searchValue = value.trim();
-      const isNumeric = /^\d+$/.test(searchValue);
-
-      const user = baseData.users.find((u) => {
-        // Search by telegram_id (numeric)
-        if (isNumeric && u.telegram_id.toString() === searchValue) {
-          return true;
-        }
-        // Search by username (with or without @)
-        const cleanUsername = searchValue.replace('@', '');
-        if (u.username.replace('@', '').toLowerCase() === cleanUsername.toLowerCase()) {
-          return true;
-        }
-        // Search by minecraft (case-insensitive)
-        if (u.minecraft.toLowerCase() === searchValue.toLowerCase()) {
-          return true;
-        }
-        return false;
-      });
-
-      if (user) {
-        setFoundUser(user);
+      if (data.success && data.user) {
+        setFoundUser(data.user);
         setAccountStatus('found');
       } else {
         setFoundUser(null);
