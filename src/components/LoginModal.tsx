@@ -72,8 +72,15 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
       return;
     }
 
+    const token = import.meta.env.VITE_GITHUB_TOKEN;
+    if (!token) {
+      console.error('VITE_GITHUB_TOKEN is not set');
+      setFoundUser(null);
+      setAccountStatus('not_found');
+      return;
+    }
+
     try {
-      const token = import.meta.env.VITE_GITHUB_TOKEN;
       const response = await fetch(
         'https://api.github.com/repos/maleon17/kopatel_bot/contents/base.jsonc',
         {
