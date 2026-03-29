@@ -3403,37 +3403,35 @@ footer {
     max-height: 280px;
     overflow-y: auto;
     padding-right: 4px;
+    align-items: flex-start;
 }
 
 .payment-item {
-    display: flex;
+    display: inline-flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 12px;
+    padding: 6px 10px;
     background: rgba(255,255,255,0.05);
     border-radius: 8px;
-    gap: 12px;
-    width: 100%;
+    gap: 16px;
+    white-space: nowrap;
 }
 
 .payment-info {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    min-width: 0;
 }
 
 .payment-date {
     font-size: 11px;
-    color: #666;
-    line-height: 1.2;
+    color: #888;
 }
 
 .payment-type {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: #fff;
-    line-height: 1.2;
 }
 
 .payment-meta {
@@ -3441,7 +3439,6 @@ footer {
     flex-direction: column;
     align-items: flex-end;
     gap: 4px;
-    flex-shrink: 0;
 }
 
 .payment-amount {
@@ -3451,11 +3448,10 @@ footer {
 }
 
 .payment-status {
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 10px;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 8px;
     font-weight: 600;
-    white-space: nowrap;
 }
 
 .payment-status-pending {
