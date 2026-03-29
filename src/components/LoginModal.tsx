@@ -68,7 +68,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
 
     try {
       const flaskUrl = import.meta.env.VITE_FLASK_URL;
-      const response = await fetch(`${flaskUrl}/get_user`, {
+      const response = await fetch(`${flaskUrl}/api/get_user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ identifier: value.trim() }),
@@ -108,7 +108,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
 
     try {
       const flaskUrl = import.meta.env.VITE_FLASK_URL;
-      const response = await fetch(`${flaskUrl}/send_code`, {
+      const response = await fetch(`${flaskUrl}/api/send_code`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ telegram_id: foundUser.telegram_id }),
@@ -129,7 +129,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
     setIsVerifying(true);
     try {
       const flaskUrl = import.meta.env.VITE_FLASK_URL;
-      const response = await fetch(`${flaskUrl}/verify_code`, {
+      const response = await fetch(`${flaskUrl}/api/verify_code`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
