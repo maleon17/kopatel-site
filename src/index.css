@@ -3409,10 +3409,9 @@ footer {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
-    padding: 4px 10px;
+    padding: 6px 10px;
     background: rgba(255,255,255,0.05);
     border-radius: 8px;
-    height: 28px;
 }
 
 .payment-info {
