@@ -3412,33 +3412,35 @@ footer {
     padding: 4px 10px;
     background: rgba(255,255,255,0.05);
     border-radius: 8px;
+    height: 28px;
 }
 
 .payment-info {
     display: flex;
-    flex-direction: column;
-    gap: 1px;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
     min-width: 0;
 }
 
 .payment-date {
     font-size: 10px;
     color: #888;
-    line-height: 1.1;
+    white-space: nowrap;
 }
 
 .payment-type {
     font-size: 12px;
     font-weight: 600;
     color: #fff;
-    line-height: 1.1;
+    white-space: nowrap;
 }
 
 .payment-meta {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
     flex-shrink: 0;
 }
 
@@ -3446,7 +3448,7 @@ footer {
     font-size: 12px;
     font-weight: 700;
     color: #f1c40f;
-    line-height: 1.1;
+    white-space: nowrap;
 }
 
 .payment-status {
@@ -3454,7 +3456,7 @@ footer {
     padding: 1px 5px;
     border-radius: 6px;
     font-weight: 600;
-    line-height: 1.1;
+    white-space: nowrap;
 }
 
 .payment-status-pending {
