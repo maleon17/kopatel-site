@@ -45,16 +45,25 @@ export default function AccountPage() {
 
     const skinUrl = `https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/skin/${skinSystem === 'tlauncher' ? 'tlauncher' : 'elyby'}/${user.minecraft}`;
 
+    const isMobile = window.innerWidth <= 480;
+    const viewerWidth = isMobile ? 200 : 300;
+    const viewerHeight = isMobile ? 280 : 400;
+
     viewerRef.current = new SkinViewer({
       canvas: canvasRef.current,
-      width: 300,
-      height: 400,
+      width: viewerWidth,
+      height: viewerHeight,
       skin: skinUrl,
     });
 
     viewerRef.current.animation = new WalkingAnimation();
     viewerRef.current.animation.speed = 0.8;
     viewerRef.current.autoRotate = false;
+    
+    // Zoom out on mobile to fit the skin
+    if (isMobile) {
+      viewerRef.current.camera.position.z = 150;
+    }
 
     // Mouse tracking
     const handleMouseMove = (e: MouseEvent) => {
@@ -63,11 +72,28 @@ export default function AccountPage() {
       viewerRef.current.playerObject.rotation.y = x * 0.5;
     };
     window.addEventListener('mousemove', handleMouseMove);
+    
+    // Handle resize
+    const handleResize = () => {
+      if (!viewerRef.current || !canvasRef.current) return;
+      const newIsMobile = window.innerWidth <= 480;
+      const newWidth = newIsMobile ? 200 : 300;
+      const newHeight = newIsMobile ? 280 : 400;
+      viewerRef.current.width = newWidth;
+      viewerRef.current.height = newHeight;
+      if (newIsMobile) {
+        viewerRef.current.camera.position.z = 150;
+      } else {
+        viewerRef.current.camera.position.z = 100;
+      }
+    };
+    window.addEventListener('resize', handleResize);
 
     return () => {
       viewerRef.current?.dispose();
       viewerRef.current = null;
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', handleResize);
     };
   }, [user?.minecraft, skinSystem]);
 
