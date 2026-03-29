@@ -62,7 +62,7 @@ export default function AccountPage() {
     
     // Zoom out on mobile to fit the skin
     if (isMobile) {
-      viewerRef.current.camera.position.z = 150;
+      viewerRef.current.camera.position.z = 80;
     }
 
     // Mouse tracking
@@ -82,7 +82,7 @@ export default function AccountPage() {
       viewerRef.current.width = newWidth;
       viewerRef.current.height = newHeight;
       if (newIsMobile) {
-        viewerRef.current.camera.position.z = 150;
+        viewerRef.current.camera.position.z = 80;
       } else {
         viewerRef.current.camera.position.z = 100;
       }
