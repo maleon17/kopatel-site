@@ -31,7 +31,6 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
   const [accountStatus, setAccountStatus] = useState<'idle' | 'found' | 'not_found'>('idle');
   const [codeSent, setCodeSent] = useState(false);
   const [timer, setTimer] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
 
   // Close modal on Escape
@@ -73,7 +72,6 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
       return;
     }
 
-    setIsLoading(true);
     try {
       const token = import.meta.env.VITE_GITHUB_TOKEN;
       const response = await fetch(
@@ -129,8 +127,6 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
       console.error('Search error:', error);
       setFoundUser(null);
       setAccountStatus('not_found');
-    } finally {
-      setIsLoading(false);
     }
   }, []);
 
