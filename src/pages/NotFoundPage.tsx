@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import QRCode from 'qrcode.react';
+import { QRCodeSVG } from 'qrcode.react';
 
 export default function NotFoundPage() {
   const navigate = useNavigate();
@@ -124,7 +124,7 @@ export default function NotFoundPage() {
             </p>
 
             <div className="mx-auto my-8 p-4 bg-white rounded-lg shadow-xl w-fit">
-              <QRCode
+              <QRCodeSVG
                 value="https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll"
                 size={256}
                 level="H"
