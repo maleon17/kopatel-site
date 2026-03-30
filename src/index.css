@@ -72,7 +72,6 @@ header .container {
 .header-right {
     display: flex;
     align-items: center;
-    gap: 12px;
 }
 
 /* ── О платформе ── */
@@ -2876,7 +2875,6 @@ footer {
     font-weight: 700;
     color: #fff;
     margin-bottom: 4px;
-    max-width: 160px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
