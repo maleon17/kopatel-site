@@ -123,24 +123,40 @@ export default function NotFoundPage() {
               Вы пробили код реальности и нашли то, что скрыто. Ваша награда находится за этим QR-кодом:
             </p>
 
-            <a
-              href="https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block no-underline"
-            >
-              <div className="mx-auto flex items-center justify-center w-64 h-64 bg-white rounded-lg shadow-xl cursor-pointer">
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '2rem', marginBottom: '2rem' }}>
+              <a
+                href="https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  width: '260px', 
+                  height: '260px', 
+                  backgroundColor: 'white', 
+                  borderRadius: '12px', 
+                  boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                  textDecoration: 'none'
+                }}
+              >
                 <QRCodeSVG
                   value="https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll"
-                  size={220} // Уменьшили размер, чтобы p-4 от div-а не конфликтовал
+                  size={220}
                   level="H"
                   includeMargin={false}
                 />
-              </div>
-            </a>
-            <p className="text-center text-sm text-gray-500 mt-4">
-              или нажмите на qr-код чтобы перейти по ссылке
-            </p>
+              </a>
+              <p style={{ 
+                textAlign: 'center', 
+                fontSize: '0.875rem', 
+                color: '#6b7280', 
+                marginTop: '1rem',
+                fontFamily: 'sans-serif' 
+              }}>
+                или нажмите на qr-код чтобы перейти по ссылке
+              </p>
+            </div>
 
             <div className="modal-actions">
               <button className="btn btn-login" onClick={() => setShowSecret(false)}>
