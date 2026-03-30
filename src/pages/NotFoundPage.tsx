@@ -127,15 +127,16 @@ export default function NotFoundPage() {
               href="https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll"
               target="_blank"
               rel="noopener noreferrer"
-              className="mx-auto block w-fit cursor-pointer"
+              className="mx-auto block w-fit"
             >
-              <QRCodeSVG
-                value="https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll"
-                size={256}
-                level="H"
-                includeMargin={false}
-                className="mx-auto block w-64 h-64 p-4 bg-white rounded-lg shadow-xl"
-              />
+              <div className="mx-auto block w-64 h-64 p-4 bg-white rounded-lg shadow-xl cursor-pointer">
+                <QRCodeSVG
+                  value="https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll"
+                  size={256}
+                  level="H"
+                  includeMargin={false}
+                />
+              </div>
             </a>
             <p className="text-center text-sm text-gray-500 mt-4">или нажмите на qr-код чтобы перейти по ссылке</p>
 
