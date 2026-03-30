@@ -123,14 +123,20 @@ export default function NotFoundPage() {
               Вы пробили код реальности и нашли то, что скрыто. Ваша награда находится за этим QR-кодом:
             </p>
 
-            <div className="mx-auto my-8 p-4 bg-white rounded-lg shadow-xl w-fit">
+            <a
+              href="https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mx-auto block w-fit p-4 bg-white rounded-lg shadow-xl cursor-pointer hover:shadow-2xl transition-shadow"
+            >
               <QRCodeSVG
                 value="https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll"
                 size={256}
                 level="H"
-                includeMargin={true}
+                includeMargin={false}
               />
-            </div>
+            </a>
+            <p className="text-center text-sm text-gray-500 mt-4">или нажмите на qr-код чтобы перейти по ссылке</p>
 
             <div className="modal-actions">
               <button className="btn btn-login" onClick={() => setShowSecret(false)}>
