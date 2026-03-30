@@ -127,18 +127,20 @@ export default function NotFoundPage() {
               href="https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll"
               target="_blank"
               rel="noopener noreferrer"
-              className="mx-auto block w-fit"
+              className="block no-underline"
             >
-              <div className="mx-auto block w-64 h-64 p-4 bg-white rounded-lg shadow-xl cursor-pointer">
+              <div className="mx-auto flex items-center justify-center w-64 h-64 bg-white rounded-lg shadow-xl cursor-pointer">
                 <QRCodeSVG
                   value="https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll"
-                  size={256}
+                  size={220} // Уменьшили размер, чтобы p-4 от div-а не конфликтовал
                   level="H"
                   includeMargin={false}
                 />
               </div>
             </a>
-            <p className="text-center text-sm text-gray-500 mt-4">или нажмите на qr-код чтобы перейти по ссылке</p>
+            <p className="text-center text-sm text-gray-500 mt-4">
+              или нажмите на qr-код чтобы перейти по ссылке
+            </p>
 
             <div className="modal-actions">
               <button className="btn btn-login" onClick={() => setShowSecret(false)}>
