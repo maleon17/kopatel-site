@@ -4,10 +4,13 @@ import { useNavigate } from 'react-router-dom';
 export default function NotFoundPage() {
   const navigate = useNavigate();
   const [countdown, setCountdown] = useState(10);
+  const [showSecret, setShowSecret] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Обратный отсчёт
   useEffect(() => {
+    if (showSecret) return;
+
     const timer = setInterval(() => {
       setCountdown(prev => {
         if (prev <= 1) {
@@ -19,7 +22,7 @@ export default function NotFoundPage() {
       });
     }, 1000);
     return () => clearInterval(timer);
-  }, [navigate]);
+  }, [navigate, showSecret]);
 
   // Canvas помехи
   useEffect(() => {
@@ -86,7 +89,7 @@ export default function NotFoundPage() {
           <span>DATA_CORRUPTION</span>
         </div>
 
-        <div className="glitch-wrapper">
+        <div className="glitch-wrapper" onClick={() => setShowSecret(true)} style={{ cursor: 'pointer' }}>
           <h1 className="glitch" data-text="404">404</h1>
         </div>
 
@@ -107,6 +110,34 @@ export default function NotFoundPage() {
           Автоматический респаун в лобби через <strong>{countdown}</strong> сек...
         </div>
       </div>
+
+      {showSecret && (
+        <div className="modal-backdrop" onClick={() => setShowSecret(false)} style={{ zIndex: 50 }}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowSecret(false)}>✕</button>
+
+            <h2 className="modal-title">ПОЗДРАВЛЯЕМ! ВЫ НАШЛИ СЕКРЕТКУ!</h2>
+
+            <p className="modal-description">
+              Вы пробили код реальности и нашли то, что скрыто. Ваша награда находится за этим QR-кодом:
+            </p>
+
+            <div className="modal-qr-container">
+              <img
+                src={`https://api.qrserver.com/v1/create-qrcode/?size=200x200&data=https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll`}
+                alt="Secret QR Code"
+                className="modal-qr-code"
+              />
+            </div>
+
+            <div className="modal-actions">
+              <button className="btn btn-login" onClick={() => setShowSecret(false)}>
+                ЗАКРЫТЬ
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
