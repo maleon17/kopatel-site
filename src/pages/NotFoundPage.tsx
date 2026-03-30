@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import QRCode from 'qrcode.react';
 
 export default function NotFoundPage() {
   const navigate = useNavigate();
@@ -122,11 +123,12 @@ export default function NotFoundPage() {
               Вы пробили код реальности и нашли то, что скрыто. Ваша награда находится за этим QR-кодом:
             </p>
 
-            <div className="modal-qr-container">
-              <img
-                src={`https://api.qrserver.com/v1/create-qrcode/?size=200x200&data=https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll`}
-                alt="Secret QR Code"
-                className="modal-qr-code"
+            <div className="mx-auto my-8 p-4 bg-white rounded-lg shadow-xl w-fit">
+              <QRCode
+                value="https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll"
+                size={256}
+                level="H"
+                includeMargin={true}
               />
             </div>
 
