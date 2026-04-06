@@ -21,7 +21,7 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <BrowserRouter basename="/Kopatel.platform">
+    <BrowserRouter basename="/kopatel-site">
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<><Header /><HomePage /></>} />
