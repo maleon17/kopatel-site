@@ -93,13 +93,13 @@ export default function Header() {
               <span></span><span></span><span></span>
             </button>
             <div className="logo">
-              <Link to="/" style={{textDecoration:'none', color:'inherit'}}>kopatel.platform</Link>
+              <Link to="/home" style={{textDecoration:'none', color:'inherit'}}>kopatel.platform</Link>
             </div>
           </div>
           <div className="header-right">
             <nav>
               <ul>
-                <li><Link to="/">Главная</Link></li>
+                <li><Link to="/home">Главная</Link></li>
                 <li><Link to="/games" className="nav-btn">Играть</Link></li>
                 <li><a href="https://t.me/kopatel_support_bot" target="_blank" rel="noreferrer" className="nav-btn nav-btn-support">Поддержка</a></li>
               </ul>
@@ -141,7 +141,7 @@ export default function Header() {
           <div className="mobile-nav-content-wrapper">
             <p className="mobile-nav-title">Навигация</p>
             <ul>
-              <li><Link to="/" onClick={closeMenu}>🏠 Главная</Link></li>
+              <li><Link to="/home" onClick={closeMenu}>🏠 Главная</Link></li>
               <li><Link to="/the-lost-beyond" onClick={closeMenu}>⚔️ The lost beyond: reboot</Link></li>
             </ul>
             <p className="mobile-nav-title">Магазин</p>
@@ -171,7 +171,7 @@ export default function Header() {
             <div className="sidebar-nav-group">
               <div className="mobile-nav-title">Навигация</div>
               <ul>
-                <li><Link to="/" onClick={closeMenu}>🏠 Главная</Link></li>
+                <li><Link to="/home" onClick={closeMenu}>🏠 Главная</Link></li>
                 <li><Link to="/games" onClick={closeMenu}>🎮 Все сервера</Link></li>
                 <li><Link to="/the-lost-beyond" onClick={closeMenu}>⚔️ The lost beyond: reboot</Link></li>
               </ul>
