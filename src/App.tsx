@@ -24,7 +24,7 @@ export default function App() {
     <BrowserRouter basename="/kopatel-site">
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<><Header /><HomePage /></>} />
+        <Route path="/home" element={<><Header /><HomePage /></>} />
         <Route path="/games" element={<><Header /><GamesPage /></>} />
         <Route path="/the-lost-beyond" element={<><Header /><TheLostBeyondPage /></>} />
         <Route path="/shop" element={<><Header /><ShopPage /></>} />
