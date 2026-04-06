@@ -16,7 +16,7 @@ export default function NotFoundPage() {
       setCountdown(prev => {
         if (prev <= 1) {
           clearInterval(timer);
-          navigate('/');
+          navigate('/home');
           return 0;
         }
         return prev - 1;
@@ -98,7 +98,7 @@ export default function NotFoundPage() {
         <p className="not-found-subtitle">Похоже, этот сегмент данных провалился сквозь текстуры веба. Мы отправили поисковый отряд, но они нашли только этот глитч.</p>
 
         <div className="not-found-actions">
-          <button className="not-found-btn" onClick={() => navigate('/')}>
+          <button className="not-found-btn" onClick={() => navigate('/home')}>
             ТЕЛЕПОРТ В ЛОББИ
           </button>
           <button className="not-found-btn secondary" onClick={() => navigate(-1)}>
