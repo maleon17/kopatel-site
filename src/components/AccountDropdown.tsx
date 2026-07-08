@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { UserData } from '../utils/auth';
+import { skinUrl } from '../config';
 
 interface AccountDropdownProps {
   user: UserData | null;
@@ -46,7 +47,7 @@ export default function AccountDropdown({
             <div
               className="skin-face-avatar"
               style={{
-                backgroundImage: `url(https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/skin/${user.skin_system === 'tlauncher' ? 'tlauncher' : 'elyby'}/${user.minecraft})`,
+                backgroundImage: `url(${skinUrl(user.skin_system, user.minecraft)})`,
               }}
             />
           </div>
@@ -71,7 +72,7 @@ export default function AccountDropdown({
             <div
               className="skin-face-avatar"
               style={{
-                backgroundImage: `url(https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/skin/elyby/Steve)`,
+                backgroundImage: `url(${skinUrl('elyby', 'Steve')})`,
               }}
             />
           </div>

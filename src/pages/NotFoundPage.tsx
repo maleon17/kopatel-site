@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { QRCodeSVG } from 'qrcode.react';
+import { API_BASE } from '../config';
 
 export default function NotFoundPage() {
   const navigate = useNavigate();
@@ -125,7 +126,7 @@ export default function NotFoundPage() {
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '2rem', marginBottom: '2rem' }}>
               <a
-                href="https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll"
+                href={`${API_BASE}/rickroll`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ 
@@ -141,7 +142,7 @@ export default function NotFoundPage() {
                 }}
               >
                 <QRCodeSVG
-                  value="https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/rickroll"
+                  value={`${API_BASE}/rickroll`}
                   size={220}
                   level="H"
                   includeMargin={false}

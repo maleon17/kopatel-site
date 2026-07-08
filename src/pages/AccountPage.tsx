@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserData, getSession, setSession } from '../utils/auth';
+import { skinUrl as buildSkinUrl } from '../config';
 import { SkinViewer, WalkingAnimation } from 'skinview3d';
 
 const serviceNames: Record<string, string> = {
@@ -43,7 +44,7 @@ export default function AccountPage() {
       viewerRef.current = null;
     }
 
-    const skinUrl = `https://kopatel-skin-proxy.andrey-mishin2008.workers.dev/skin/${skinSystem === 'tlauncher' ? 'tlauncher' : 'elyby'}/${user.minecraft}`;
+    const skinUrl = buildSkinUrl(skinSystem, user.minecraft);
 
     const isMobile = window.innerWidth <= 480;
     const viewerWidth = isMobile ? 200 : 300;
