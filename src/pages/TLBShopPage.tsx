@@ -1,4 +1,5 @@
 import Footer from '../components/Footer';
+import PausedNotice from '../components/PausedNotice';
 
 const purchaseItem = (itemName: string, price: string) => {
   const text = encodeURIComponent(`Хочу купить: ${itemName}\nЦена: ${price} ⭐`);
@@ -44,13 +45,15 @@ export default function TLBShopPage() {
           <h1>Магазин The lost beyond: reboot</h1>
           <p>Игровые преимущества для The lost beyond: reboot!</p>
           <div className="status">
-            <span className="dot"></span> Все платежи безопасны
+            <span className="dot paused"></span> Сервер на паузе — магазин работает
           </div>
           <div className="scroll-arrow" onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}>
             <span></span><span></span><span></span>
           </div>
         </div>
       </section>
+
+      <PausedNotice shop />
 
       <section className="game-shop" id="game-shop">
         <div className="container">

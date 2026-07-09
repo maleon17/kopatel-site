@@ -1,25 +1,8 @@
-import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 export default function GamesPage() {
   const navigate = useNavigate();
-  const [online, setOnline] = useState<string>('0');
-
-  useEffect(() => {
-    const fetchOnline = async () => {
-      try {
-        const r = await fetch('https://api.mcsrvstat.us/2/game11.gamely.pro:24001');
-        const d = await r.json();
-        setOnline(d.players ? String(d.players.online) : '0');
-      } catch {
-        setOnline('—');
-      }
-    };
-    fetchOnline();
-    const t = setInterval(fetchOnline, 5000);
-    return () => clearInterval(t);
-  }, []);
 
   return (
     <>
@@ -28,7 +11,7 @@ export default function GamesPage() {
           <h1>Игровые Режимы</h1>
           <p>Выберите свой любимый режим и погрузитесь в мир приключений!</p>
           <div className="status">
-            <span className="dot"></span> Доступен 1 режим
+            <span className="dot paused"></span> Режимы временно на паузе
           </div>
           <div className="scroll-arrow" onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}>
             <span></span><span></span><span></span>
@@ -39,9 +22,9 @@ export default function GamesPage() {
       <section className="games-showcase">
         <div className="container">
           <div className="games-grid">
-            <div className="game-card active">
+            <div className="game-card paused">
               <div className="game-image">
-                <div className="game-badge">АКТИВЕН</div>
+                <div className="game-badge paused">На паузе</div>
               </div>
               <div className="game-info">
                 <h3>The lost beyond: reboot</h3>
@@ -58,11 +41,11 @@ export default function GamesPage() {
                     <span className="stat-value">1.20.1</span>
                   </div>
                   <div className="stat">
-                    <span className="stat-label">Онлайн:</span>
-                    <span className="stat-value">{online}</span>
+                    <span className="stat-label">Статус:</span>
+                    <span className="stat-value" style={{ color: '#f39c12' }}>На паузе</span>
                   </div>
                 </div>
-                <Link to="/the-lost-beyond" className="game-btn">Играть</Link>
+                <Link to="/the-lost-beyond" className="game-btn">Подробнее</Link>
               </div>
             </div>
 
