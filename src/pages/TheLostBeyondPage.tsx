@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import Footer from '../components/Footer';
+import PausedNotice from '../components/PausedNotice';
 
 type TabId = 'ip' | 'teams' | 'classes' | 'mechanics';
 
@@ -33,7 +34,6 @@ export default function TheLostBeyondPage() {
   const [activeTab, setActiveTab] = useState<TabId>('ip');
   const [prevTab, setPrevTab] = useState<TabId | null>(null);
   const [animating, setAnimating] = useState(false);
-  const [online, setOnline] = useState<string>('0');
   const [copied, setCopied] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -42,21 +42,6 @@ export default function TheLostBeyondPage() {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    const fetchOnline = async () => {
-      try {
-        const r = await fetch('https://api.mcsrvstat.us/2/game11.gamely.pro:24001');
-        const d = await r.json();
-        setOnline(d.players ? String(d.players.online) : '0');
-      } catch {
-        setOnline('—');
-      }
-    };
-    fetchOnline();
-    const t = setInterval(fetchOnline, 5000);
-    return () => clearInterval(t);
   }, []);
 
   const copyIP = () => {
@@ -105,6 +90,9 @@ export default function TheLostBeyondPage() {
               <span className="copy-hint">Нажми, чтобы скопировать</span>
             </div>
             <p>Версия: 1.20.1 | Режим: Выживание</p>
+            <p style={{ color: '#f39c12', marginTop: '10px' }}>
+              ⏸ Сервер сейчас не работает — IP пригодится после возобновления проекта.
+            </p>
           </div>
         );
       case 'teams':
@@ -163,13 +151,15 @@ export default function TheLostBeyondPage() {
           <h1>The lost beyond: reboot</h1>
           <p>Эпические битвы между Красными и Синими командами! Сражайтесь против вражеской команды и зомби в мире выживания. Выберите свой класс и покажите свою тактику на поле боя!</p>
           <div className="status">
-            <span className="dot"></span> Сейчас в игре: <b>{online}</b>
+            <span className="dot paused"></span> Сервер временно на паузе
           </div>
           <div className="scroll-arrow" onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}>
             <span></span><span></span><span></span>
           </div>
         </div>
       </section>
+
+      <PausedNotice />
 
       <section className="about" id="about-server">
         <div className="container">
@@ -185,6 +175,7 @@ export default function TheLostBeyondPage() {
         <div className="container">
           <h2>Как начать играть?</h2>
           <p>Регистрация проходит через нашего Telegram-бота. Нажми кнопку ниже, напиши <strong>/start</strong> и следуй инструкции.</p>
+          <p style={{ color: '#f39c12' }}>Пока сервер на паузе, зарегистрироваться можно заранее — попадёшь в игру сразу после возвращения.</p>
           <a href="https://t.me/kopatel_platform_bot" target="_blank" rel="noreferrer" className="project-btn" style={{ fontSize: '18px', padding: '16px 40px', display: 'inline-block', marginTop: '20px' }}>
             Зарегистрироваться
           </a>

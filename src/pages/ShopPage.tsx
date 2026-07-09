@@ -24,13 +24,13 @@ export default function ShopPage() {
           <p>Выберите игровой режим для просмотра доступных товаров и донатов!</p>
 
           <div className="shop-modes">
-            <div className="mode-card">
+            <div className="mode-card paused">
               <div className="mode-image">
-                <div className="mode-badge">АКТИВЕН</div>
+                <div className="mode-badge paused">На паузе</div>
               </div>
               <div className="mode-info">
                 <h3>The lost beyond: reboot</h3>
-                <p>Эпические битвы между Красными и Синими командами! Сражайтесь против вражеской команды и зомби в мире выживания.</p>
+                <p>Сервер временно на паузе. Магазин доступен — покупки вступят в силу после возобновления проекта.</p>
                 <div className="mode-features">
                   <span className="feature">PvP</span>
                   <span className="feature">Классы</span>

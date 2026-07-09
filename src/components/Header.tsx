@@ -143,7 +143,7 @@ export default function Header() {
             <p className="mobile-nav-title">Навигация</p>
             <ul>
               <li><Link to="/home" onClick={closeMenu}>🏠 Главная</Link></li>
-              <li><Link to="/the-lost-beyond" onClick={closeMenu}>⚔️ The lost beyond: reboot</Link></li>
+              <li><Link to="/the-lost-beyond" onClick={closeMenu}>⚔️ The lost beyond: reboot<span className="nav-pause-chip">пауза</span></Link></li>
             </ul>
             <p className="mobile-nav-title">Магазин</p>
             <ul>
@@ -174,7 +174,7 @@ export default function Header() {
               <ul>
                 <li><Link to="/home" onClick={closeMenu}>🏠 Главная</Link></li>
                 <li><Link to="/games" onClick={closeMenu}>🎮 Все сервера</Link></li>
-                <li><Link to="/the-lost-beyond" onClick={closeMenu}>⚔️ The lost beyond: reboot</Link></li>
+                <li><Link to="/the-lost-beyond" onClick={closeMenu}>⚔️ The lost beyond: reboot<span className="nav-pause-chip">пауза</span></Link></li>
               </ul>
               <div className="mobile-nav-title">Магазин</div>
               <ul>
